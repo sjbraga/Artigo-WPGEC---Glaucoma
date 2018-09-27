@@ -150,11 +150,44 @@ palavra 1; palavra 2.
 
   \subsection{Dataset}
 
+  O dataset original foi obtido com o departamento de oftalmologia da Unicamp. O dataset consiste de imagens de OCT de 56 olhos com glaucoma e 66 olhos normais, totalizando 122 pacientes. Os gráficos de espessura de fibras nervosas foram obtidos através da extração das imagens do PDF do exame. Foram selecionados para o experimento somente os olhos de pacientes que foram manualmente classificados por especialistas.
+
+  Para a separação do dataset em treino e validação, foram separados 20\% de olhos normais e 20\% de olhos com glaucoma para validação, e o restante para treino, totalizando 98 imagens de treino e 24 para validação. As imagens selecionadas para teste não estão presentes no dataset de treino, para que o algoritmo possa classificar imagens ainda não vistas.
+
+  Para evitar overfitting, foi empregada uma técnica para aumentar o número de exemplos a partir das imagens no dataset de treino. Cada imagem foi rotacionada 100 vezes em ângulos aleatórios entre 0 e 360 graus, gerando assim um dataset de treino com 9800 imagens. As imagens de validação não foram rotacionadas.
+
+%aumento do dataset, rotações aleatorias entre 0 e 360
+%divisao treino e validação
+
   \subsection{Pré-processamento}
 
+  Para utilização do transfer learning, foi necessário fazer a subtração do pixel médio em todas as imagens do dataset de treino. O valor médio de cada pixel da imagem é calculado sobre todas as imagens do dataset de treino. Essa imagem média é então subtraída de cada imagem do dataset. Dessa forma, todos os pixels de entrada estarão no mesmo range(?), evitando divergência nos gradientes.
+
+  Onde houveram falhas na aquisição da imagem, pixels com valores RGB próximos ao preto foram substituídos pelo valor de preto absoluto RGB (0, 0, 0).
+
+  % subtração da media
+  % areas pretas para zero absoluto
+
   \subsection{Experimentos}
+%setup do servidor, quais gpus
+  %utilizando caffe
+
+  \subsubsection{Resultados com transfer learning}
+
+%estrategia de learning rate
+  %iterações e tempo de processamento
+  %grafico da acuracia
+
+  \subsubsection{Resultados sem transfer learning}
+
+%iterações e tempo de processamento
+  %grafico da acuracia
 
 \section{Discussão}
+
+%dificuldades para definir os parametros corretos de treinamento
+%dataset pequeno
+%tempo de treinamento(?)
 
 \section{Conclusão}
 
