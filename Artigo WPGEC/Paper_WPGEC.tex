@@ -24,6 +24,8 @@
 % *** MATH PACKAGES ***
 %
 \usepackage{amsmath}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
 
 % *** PDF, URL AND HYPERLINK PACKAGES ***
@@ -92,19 +94,6 @@ Abstract here.
 word 1; word 2.
 \end{IEEEkeywords}
 
-%%%%Only for english article%%%%%%%%%%%%%%%%
-\renewcommand\IEEEkeywordsname{Classification}
-\begin{IEEEkeywords}
-	\label{Classification}
-	indicate whether the study is: undergraduate research, master's degree or doctorate degree [Only for article in English].
-\end{IEEEkeywords}
-\renewcommand\IEEEkeywordsname{Category}
-\begin{IEEEkeywords}
-	\label{Category}
-	Indicate the state of the research (applies to Master degree/Doctorate degree): 
-	Beginner, Intermediate ou In conclusion [Only for article in English] 
-\end{IEEEkeywords}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\abstractname}{Resumo}
 \begin{abstract}
 \label{Resumo}
@@ -120,23 +109,15 @@ palavra 1; palavra 2.
 \renewcommand\IEEEkeywordsname{Classifica\c{c}\~{a}o}
 \begin{IEEEkeywords}
 	\label{classificacao}
-	Indicar se o estudo \'{e}: Incia\c{c}\~{a}o cientifica, Mestrado ou Doutorado
+	Mestrado
 \end{IEEEkeywords}
 
 \renewcommand\IEEEkeywordsname{Categoria}
 \begin{IEEEkeywords}
 	\label{Categoria}
-	Indicar o estado da pesquisa (aplica para Mestrado / Doutorado): 
- 	Iniciante, Intermedi\'{a}ria ou Em conclus\~{a}o 
+	Iniciante 
 \end{IEEEkeywords}
-% For peer review papers, you can put extra information on the cover
-% page as needed:
-% \ifCLASSOPTIONpeerreview
-% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
-% \fi
-%
-% For peerreview papers, this IEEEtran command inserts a page break and
-% creates the second title. It will be ignored for other modes.
+
 \IEEEpeerreviewmaketitle
 
 
@@ -146,41 +127,69 @@ palavra 1; palavra 2.
 
 \section{Redes neurais profundas}
 
+  \subsection{Transfer Learning}
+
+  \subsection{Redes pré-treinadas}
+
 \section{Experimentos e resultados}
+
+%setup do servidor, quais gpus
+%utilizando caffe
+%qual o objetivo dos experimentos, como foi avaliado
+
+Os experimentos foram conduzidos em um servidor com Ubuntu 16.04 com duas GPUs NVidia Quadro K5200 com 8GB de memória cada, 24 CPUs Intel Xeon e 128GB de memória RAM. O framework de deep learning utilizado em todos os experimentos foi o Caffe, fornecido pela universidade de Berkeley \cite{jia2014caffe}.
+
+O objetivo dos experimentos, com e sem transfer learning, é a classificação binária de olhos normais ou com glaucoma em imagens de OCT. A performance das redes foram avaliadas utilizando um conjunto menor de imagens não vistas para classificação e cálculo das métricas de avaliação. O mesmo conjunto de imagens é utilizado em todos os experimentos. O dataset, pré-processamento e resultados são descritos em detalhes nas próximas seções.
 
   \subsection{Dataset}
 
+  %aumento do dataset, rotações aleatorias entre 0 e 360
+  %divisao treino e validação
+
   O dataset original foi obtido com o departamento de oftalmologia da Unicamp. O dataset consiste de imagens de OCT de 56 olhos com glaucoma e 66 olhos normais, totalizando 122 pacientes. Os gráficos de espessura de fibras nervosas foram obtidos através da extração das imagens do PDF do exame. Foram selecionados para o experimento somente os olhos de pacientes que foram manualmente classificados por especialistas.
 
-  Para a separação do dataset em treino e validação, foram separados 20\% de olhos normais e 20\% de olhos com glaucoma para validação, e o restante para treino, totalizando 98 imagens de treino e 24 para validação. As imagens selecionadas para teste não estão presentes no dataset de treino, para que o algoritmo possa classificar imagens ainda não vistas.
+  Para a separação do dataset em treino e validação, foram selecionados 20\% de olhos normais e 20\% de olhos com glaucoma para validação, e o restante para treino, totalizando 98 imagens de treino e 24 para validação. As imagens selecionadas para teste não estão presentes no dataset de treino, para que o algoritmo possa classificar imagens ainda não vistas.
 
   Para evitar overfitting, foi empregada uma técnica para aumentar o número de exemplos a partir das imagens no dataset de treino. Cada imagem foi rotacionada 100 vezes em ângulos aleatórios entre 0 e 360 graus, gerando assim um dataset de treino com 9800 imagens. As imagens de validação não foram rotacionadas.
 
-%aumento do dataset, rotações aleatorias entre 0 e 360
-%divisao treino e validação
-
   \subsection{Pré-processamento}
-
-  Para utilização do transfer learning, foi necessário fazer a subtração do pixel médio em todas as imagens do dataset de treino. O valor médio de cada pixel da imagem é calculado sobre todas as imagens do dataset de treino. Essa imagem média é então subtraída de cada imagem do dataset. Dessa forma, todos os pixels de entrada estarão no mesmo range(?), evitando divergência nos gradientes.
-
-  Onde houveram falhas na aquisição da imagem, pixels com valores RGB próximos ao preto foram substituídos pelo valor de preto absoluto RGB (0, 0, 0).
 
   % subtração da media
   % areas pretas para zero absoluto
 
-  \subsection{Experimentos}
-%setup do servidor, quais gpus
-  %utilizando caffe
+  Para utilização do transfer learning, foi necessário fazer a subtração do pixel médio em todas as imagens do dataset de treino. O valor médio de cada pixel da imagem é calculado sobre todas as imagens do dataset de treino. Essa imagem média é então subtraída de cada imagem do dataset. Dessa forma, todos os pixels de entrada estão na mesma ordem de grandeza, evitando que os gradientes desapareçam ou explodam.
 
-  \subsubsection{Resultados com transfer learning}
+  Onde houveram falhas na aquisição da imagem, gerando áreas escuras, pixels com valores RGB próximos ao preto foram substituídos pelo valor de preto absoluto RGB (0, 0, 0) para que não tenham influência sobre a decisão do classificador.
 
-%estrategia de learning rate
+  \subsection{Resultados com transfer learning}
+
+  %estrategia de learning rate
   %iterações e tempo de processamento
   %grafico da acuracia
 
-  \subsubsection{Resultados sem transfer learning}
+  Neste experimento, utilizamos a mesma arquitetura da rede VGG16, apenas alterando a saída da última camada totalmente conectada para duas saídas, correspondente às duas classes a serem classificadas: normal e glaucoma. 
+  
+  Os pesos pré-treinados foram carregados para inicialização apenas das camadas convolucionais. As três últimas camadas totalmente conectadas foram iniciadas com valores aleatórios devido à diferença de tamanho entre as imagens do dataset Imagenet e as imagens de OCT classificadas nesse experimento. Essa diferença gera quantidades de parâmetros diferentes na saída da última camada convolucional. Sendo assim, as camadas totalmente conectadas foram inicializadas com valores aleatórios de uma distribuição gaussiana com desvio padrão $0.01$.
 
-%iterações e tempo de processamento
+  O treinamento foi realizado em todas as camadas da rede, utilizando o gradiente descendente estocástico por $5000$ iterações, com mini batches de 15 imagens. A taxa de aprendizagem inicial foi de $0.001$. A cada 1000 iterações a taxa de aprendizagem foi diminuída utilizando a equação \ref{eq:learning_rate}.
+
+  \begin{equation}
+    base\_lr * \gamma^{\floor*{\frac{iter}{step}}}
+    \label{eq:learning_rate}
+  \end{equation}
+
+  Onde $base\_lr$ é a taxa de aprendizagem inicial, $\gamma$ é um parâmetro do Caffe definido com o valor $0.1$, $iter$ é o número da iteração atual e $step$ é um parâmetro definido como $1000$.
+
+  \begin{figure}[!tp]
+    \centering
+    \includegraphics[width=2.5in]{img/curve_vgg16.png}
+    \caption{Acurácia e perda de treino e validação da rede VGG16 com transfer learning.}
+    \label{fig:acuracia_vgg16_transfer}
+  \end{figure}
+
+  \subsection{Resultados sem transfer learning}
+
+  %iterações e tempo de processamento
   %grafico da acuracia
 
 \section{Discussão}
@@ -194,8 +203,8 @@ palavra 1; palavra 2.
 
 
 %Use BIB file
-% \bibliographystyle{abntex2-num}
-% \bibliography{template}
+\bibliographystyle{abntex2-num}
+\bibliography{template}
 
 % that's all folks
 \end{document}
