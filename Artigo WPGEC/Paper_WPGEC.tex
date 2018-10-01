@@ -59,7 +59,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Diagnóstico do Glaucoma a partir de imagens de OCT e Redes Neurais Profundas (DNN)}
+\title{Paper title - English \\ T\'{i}tulo do artigo - somente para documento escrito em Portugu\^{e}s}
 
 
 
@@ -146,7 +146,7 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
   %aumento do dataset, rotações aleatorias entre 0 e 360
   %divisao treino e validação
 
-  O dataset original foi obtido com o departamento de oftalmologia da Unicamp. O dataset consiste de imagens de OCT de 56 olhos com glaucoma e 66 olhos normais, totalizando 122 pacientes. Os gráficos de espessura de fibras nervosas foram obtidos através da extração das imagens do PDF do exame. Foram selecionados para o experimento somente os olhos de pacientes que foram manualmente classificados por especialistas.
+  O dataset original foi obtido com o departamento de oftalmologia da Unicamp. O dataset consiste de imagens de OCT com tamanho 136x136 de 56 olhos com glaucoma e 66 olhos normais, totalizando 122 pacientes. Os gráficos de espessura de fibras nervosas foram obtidos através da extração das imagens do PDF do exame. Foram selecionados para o experimento somente os olhos de pacientes que foram manualmente classificados por especialistas.
 
   Para a separação do dataset em treino e validação, foram selecionados 20\% de olhos normais e 20\% de olhos com glaucoma para validação, e o restante para treino, totalizando 98 imagens de treino e 24 para validação. As imagens selecionadas para teste não estão presentes no dataset de treino, para que o algoritmo possa classificar imagens ainda não vistas.
 
@@ -167,11 +167,11 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
   %iterações e tempo de processamento
   %grafico da acuracia
 
-  Neste experimento, utilizamos a mesma arquitetura da rede VGG16, apenas alterando a saída da última camada totalmente conectada para duas saídas, correspondente às duas classes a serem classificadas: normal e glaucoma. 
+  Neste experimento, utilizamos a mesma arquitetura da rede VGG16, alterando a saída da última camada totalmente conectada para duas saídas, correspondente às duas classes a serem classificadas: normal e glaucoma. A camada de entrada da rede também foi alterada para a resolução das imagens do nosso dataset. As imagens do dataset Imagenet com que a rede foi treinada tinham a resolução de 224x224 pixels, enquanto que as imagens de OCT têm resolução de 136x136 pixels.
   
-  Os pesos pré-treinados foram carregados para inicialização apenas das camadas convolucionais. As três últimas camadas totalmente conectadas foram iniciadas com valores aleatórios devido à diferença de tamanho entre as imagens do dataset Imagenet e as imagens de OCT classificadas nesse experimento. Essa diferença gera quantidades de parâmetros diferentes na saída da última camada convolucional. Sendo assim, as camadas totalmente conectadas foram inicializadas com valores aleatórios de uma distribuição gaussiana com desvio padrão $0.01$.
+  Os pesos pré-treinados foram carregados para inicialização apenas das camadas convolucionais. As três últimas camadas totalmente conectadas foram iniciadas com valores aleatórios devido à diferença de resolução entre as imagens do dataset Imagenet e as imagens de OCT classificadas nesse experimento. Essa diferença gera quantidades de parâmetros diferentes na saída da última camada convolucional. Sendo assim, as camadas totalmente conectadas foram inicializadas com valores aleatórios de uma distribuição normal com desvio padrão $0.01$.
 
-  O treinamento foi realizado em todas as camadas da rede, utilizando o gradiente descendente estocástico por $5000$ iterações, com mini batches de 15 imagens. A taxa de aprendizagem inicial foi de $0.001$. A cada 1000 iterações a taxa de aprendizagem foi diminuída utilizando a equação \ref{eq:learning_rate}.
+  O treinamento foi realizado em todas as camadas da rede, utilizando o gradiente descendente estocástico por $5000$ iterações, com mini batches de $15$ imagens. Os parâmetros de momentum e weight decay foram definidos como $0.9$ e $0.0005$, respectivamente. A taxa de aprendizagem inicial foi de $0.001$. A cada $1000$ iterações a taxa de aprendizagem foi diminuída utilizando a equação \ref{eq:learning_rate}.
 
   \begin{equation}
     base\_lr * \gamma^{\floor*{\frac{iter}{step}}}
@@ -179,6 +179,8 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
   \end{equation}
 
   Onde $base\_lr$ é a taxa de aprendizagem inicial, $\gamma$ é um parâmetro do Caffe definido com o valor $0.1$, $iter$ é o número da iteração atual e $step$ é um parâmetro definido como $1000$.
+
+  A validação do modelo foi feita utilizando um dataset de 24 imagens ainda não vistas pelo algoritmo. Foi obtida acurácia final de $95.8\%$, com sensibilidade de $100\%$ e especificidade de $92.3\%$. A figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de perda e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de perda do treinamento chega próximo à zero.
 
   \begin{figure}[!tp]
     \centering
