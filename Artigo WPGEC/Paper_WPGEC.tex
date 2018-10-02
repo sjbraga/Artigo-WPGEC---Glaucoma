@@ -27,10 +27,17 @@
 \usepackage{mathtools}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
+% *** SUBFIGURE PACKAGES ***
+\ifCLASSOPTIONcompsoc
+ \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\else
+ \usepackage[caption=false,font=footnotesize]{subfig}
+\fi
+
 
 % *** PDF, URL AND HYPERLINK PACKAGES ***
 %
-%\usepackage{url}
+\usepackage{url}
 
 
 \usepackage[brazilian]{babel}
@@ -167,6 +174,23 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
   %iterações e tempo de processamento
   %grafico da acuracia
 
+  \begin{figure*}[!t]
+    \centering
+    \subfloat[Imagem original de olho com glaucoma]{\includegraphics[width=1.5in]{img/p0042.png}%
+    \label{fig:original_glaucoma}}
+    \hfil
+    \subfloat[Olho normal classificado corretamente]{\includegraphics[width=1.5in]{img/img_00004_0_0.png}%
+    \label{fig:normal_correto}}
+    \hfil
+    \subfloat[Olho com glaucoma classificado corretamente]{\includegraphics[width=1.5in]{img/img_00002_1_1.png}%
+    \label{fig:glaucoma_normal}}
+    \hfil
+    \subfloat[Olho normal classificado como glaucoma]{\includegraphics[width=1.5in]{img/img_00010_0_1.png}%
+    \label{fig:normal_errado}}
+    \caption{Exemplos de imagens classificadas pela rede com transfer learning. Imagem \ref{fig:original_glaucoma} mostra um exemplo antes da subtração da imagem média. Figuras \ref{fig:normal_correto} à \ref{fig:normal_errado} mostram exemplos classificados durante a validação da rede.}
+    \label{fig:imagens_rede}
+  \end{figure*}
+
   Neste experimento, utilizamos a mesma arquitetura da rede VGG16, alterando a saída da última camada totalmente conectada para duas saídas, correspondente às duas classes a serem classificadas: normal e glaucoma. A camada de entrada da rede também foi alterada para a resolução das imagens do nosso dataset. As imagens do dataset Imagenet com que a rede foi treinada tinham a resolução de 224x224 pixels, enquanto que as imagens de OCT têm resolução de 136x136 pixels.
   
   Os pesos pré-treinados foram carregados para inicialização apenas das camadas convolucionais. As três últimas camadas totalmente conectadas foram iniciadas com valores aleatórios devido à diferença de resolução entre as imagens do dataset Imagenet e as imagens de OCT classificadas nesse experimento. Essa diferença gera quantidades de parâmetros diferentes na saída da última camada convolucional. Sendo assim, as camadas totalmente conectadas foram inicializadas com valores aleatórios de uma distribuição normal com desvio padrão $0.01$.
@@ -180,7 +204,7 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
 
   Onde $base\_lr$ é a taxa de aprendizagem inicial, $\gamma$ é um parâmetro do Caffe definido com o valor $0.1$, $iter$ é o número da iteração atual e $step$ é um parâmetro definido como $1000$.
 
-  A validação do modelo foi feita utilizando um dataset de 24 imagens ainda não vistas pelo algoritmo. Foi obtida acurácia final de $95.8\%$, com sensibilidade de $100\%$ e especificidade de $92.3\%$. A figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de perda e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de perda do treinamento chega próximo à zero.
+  A validação do modelo foi feita utilizando um dataset de 24 imagens não vistas pelo algoritmo durante a fasee de treinamento. Foi obtida acurácia final de $95.8\%$, com sensibilidade de $100\%$ e especificidade de $92.3\%$. A figura \ref{fig:imagens_rede} mostra exemplos de imagens classificadas pela rede durante a fase de validação. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de perda e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de perda do treinamento chega próximo à zero.
 
   \begin{figure}[!tp]
     \centering
@@ -189,7 +213,13 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
     \label{fig:acuracia_vgg16_transfer}
   \end{figure}
 
+  
+
   \subsection{Resultados sem transfer learning}
+
+  No experimento sem transfer learning, foi utilizada a mesma arquitetura de rede VGG16, porém sem utilizar os pesos pré-treinados. As camadas convolucionais foram inicializadas utilizando o algoritmo xavier \cite{xavier2010}, as últimas camadas totalmente conectadas foram inicializadas utilizando valores de distribuição normal com desvio padrão $0.01$.
+
+  O treino foi realizado com $10000$ iterações, utilizando mini batches de 20 imagens e gradiende descendente estocástico. A taxa de aprendizagem foi diminuída a cada $5000$ iterações, utilizando a equação \ref{eq:learning_rate}. Os parâmetros de momentum e e weight decay não foram alterados, utilizando os mesmos definidos no experimento com transfer learning.
 
   %iterações e tempo de processamento
   %grafico da acuracia
