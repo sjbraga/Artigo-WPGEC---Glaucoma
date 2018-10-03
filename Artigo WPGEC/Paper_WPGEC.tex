@@ -132,11 +132,28 @@ palavra 1; palavra 2.
 
 \section{Diagnóstico de glaucoma}
 
+%o que e glaucoma (tese marcelo)
+%como e feito o diagnostico
+%oct no diagnostico
+
+Glaucoma é uma neuropatia óptica crônica multifatorial e de lenta progressão que causa perda de campo visual periférico e é a segunda maior causa de cegueira no mundo, estima-se que atingirá 79,6 milhões de pessoas até 2020 \cite{Quigley2006}. Essa doença caracteriza-se pela perda da camada de fibras nervosas no olho, o que pode causar cegueira se não for tratado corretamente \cite{Quigley2011}. O dano na camada de fibras nervosas se dá antes de alteração no campo visual do paciente, por isso o diagnóstico precoce é um fator importante para evitar a perda da visão \cite{Malik2012}.
+
+O glaucoma é diagnosticado por um oftalmologista especialista, utilizando exames funcionais e estruturais. Os exames funcionais avaliam o campo visual do paciente em busca de reduções na visão. Os exames estruturais avaliam a camada de fibras nervosas para identificar alterações na espessura. Por ser uma doença que não apresenta sintomas em estágios iniciais, um oftalmologista que não é especialista pode não identificar a doença no paciente antes de haver danos ao campo visual \cite{Populacoes2009}.
+
+Um dos exames estruturais utilizados no diagnóstico de glaucoma é a tomografia de coerência óptica (OCT). Análogo a um ultrassom, o OCT utiliza feixes de luz para medir a espessura das estruturas intraoculares. Utilizando um feixe de laser, o OCT mede as espessuras das diferentes estruturas através do tempo que cada uma leva para refletir de volta a luz \cite{huang1991}.   
+
 \section{Redes neurais profundas}
+
+%o que sao redes convolucionais
+%explicar cada tipo de camada
 
   \subsection{Transfer Learning}
 
+  %como e feito transfer learning
+
   \subsection{Redes pré-treinadas}
+
+  %explicar vgg
 
 \section{Experimentos e resultados}
 
@@ -215,7 +232,7 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
 
   \subsection{Resultados sem transfer learning}
 
-  No experimento sem transfer learning, foi utilizada a mesma arquitetura de rede VGG16, porém sem utilizar os pesos pré-treinados. As camadas convolucionais foram inicializadas utilizando o algoritmo xavier \cite{xavier2010}, as últimas camadas totalmente conectadas foram inicializadas utilizando valores de distribuição normal com desvio padrão $0.01$.
+  No experimento sem transfer learning, foi utilizada a mesma arquitetura de r  ede VGG16, porém sem utilizar os pesos pré-treinados. As camadas convolucionais foram inicializadas utilizando o algoritmo xavier \cite{xavier2010}, as últimas camadas totalmente conectadas foram inicializadas utilizando valores de distribuição normal com desvio padrão $0.01$.
 
   O treino foi realizado com $10000$ iterações, utilizando mini batches de 20 imagens e gradiende descendente estocástico. A taxa de aprendizagem foi inicializada em $0.1$ e diminuída a cada $5000$ iterações, utilizando a equação \ref{eq:learning_rate}. Os parâmetros de momentum e e weight decay não foram alterados, utilizando os mesmos definidos no experimento com transfer learning. Para evitar que os gradientes aumentassem muito, foi utilizada a técnica de gradient clipping para que os gradientes não sejam maior que $1$.
 
@@ -227,6 +244,8 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
 %dificuldades para definir os parametros corretos de treinamento
 %dataset pequeno
 %tempo de treinamento(?)
+
+
 
 \section{Conclusão}
 
