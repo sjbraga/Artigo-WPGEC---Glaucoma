@@ -78,8 +78,8 @@
 % for over three affiliations, or if they all won't fit within the width
 % of the page, use this alternative format:
 % 
-\author{\IEEEauthorblockN{BRAGA, S. J.\IEEEauthorrefmark{1};
-GOMI, E. S.\IEEEauthorrefmark{1}}
+\author{\IEEEauthorblockN{BRAGA, Samira J.\IEEEauthorrefmark{1};
+GOMI, Edson S.\IEEEauthorrefmark{1}}
 \IEEEauthorblockA{\IEEEauthorrefmark{1}Escola Politécnica da Universidade de São Paulo}}
 
 
@@ -130,6 +130,8 @@ palavra 1; palavra 2.
 
 \section{Introdução}
 
+%avaliação da espessura numa area mais extensa (nao só no circulo) melhora a capacidade de diagnostico?
+
 \section{Diagnóstico de glaucoma}
 
 %o que e glaucoma (tese marcelo)
@@ -138,11 +140,15 @@ palavra 1; palavra 2.
 
 Glaucoma é uma neuropatia óptica crônica multifatorial e de lenta progressão que causa perda de campo visual periférico e é a segunda maior causa de cegueira no mundo, estima-se que atingirá 79,6 milhões de pessoas até 2020 \cite{Quigley2006}. Essa doença caracteriza-se pela perda da camada de fibras nervosas no olho, o que pode causar cegueira se não for tratado corretamente \cite{Quigley2011}. O dano na camada de fibras nervosas se dá antes de alteração no campo visual do paciente, por isso o diagnóstico precoce é um fator importante para evitar a perda da visão \cite{Malik2012}.
 
-O glaucoma é diagnosticado por um oftalmologista especialista, utilizando exames funcionais e estruturais. Os exames funcionais avaliam o campo visual do paciente em busca de reduções na visão. Os exames estruturais avaliam a camada de fibras nervosas para identificar alterações na espessura. Por ser uma doença que não apresenta sintomas em estágios iniciais, um oftalmologista que não é especialista pode não identificar a doença no paciente antes de haver danos ao campo visual \cite{Populacoes2009}.
+O glaucoma é diagnosticado por meio de do exame perimetria computadorizada (SAP), que é um exame funcional, e pela tomografia de coerência óptica (OCT), que é um exame estrutural. Os exames funcionais avaliam o campo visual do paciente em busca de reduções na visão. Os exames estruturais avaliam a camada de fibras nervosas para identificar alterações na espessura. Não é simples identificar a existência do glaucoma antes que haja dano ao campo visual \cite{Populacoes2009}.
 
-Um dos exames estruturais utilizados no diagnóstico de glaucoma é a tomografia de coerência óptica (OCT). Análogo a um ultrassom, o OCT utiliza feixes de luz para medir a espessura das estruturas intraoculares. Utilizando um feixe de laser, o OCT mede as espessuras das diferentes estruturas através do tempo que cada uma leva para refletir de volta a luz \cite{huang1991}.   
+No diagnóstico de glaucoma, o OCT é empregado para identificar alterações na espessura da camada de fibras nervosas. No exame é analisada uma faixa circular ao longo do nervo óptico e feita a projeção da espessura em cada ponto. Na figura \ref{fig:oct} temos um exemplo de saída de um equipamento de OCT, onde são exibidos os gráficos de espessura em mícrons. 
 
-No diagnóstico de glaucoma, o OCT é empregado para identificar alterações na camada de fibras nervosas. No exame é analisada uma faixa circular ao longo do nervo óptico e feita a projeção da espessura em cada ponto. Na figura \ref{fig:oct} temos um exemplo de saída de um equipamento de OCT, onde são exibidos os gráficos de espessura em mícrons. Um especialista em glaucoma pode identificar alterações nas espessuras do nervo óptico em um paciente com glaucoma inicial antes que haja danos ao campo visual. 
+O OCT utiliza feixe de laserpara medir as espessuras das diferentes estruturas através do tempo que cada uma leva para refletir de volta a luz \cite{huang1991}.   %explicar a saida do exame
+
+
+% classificadores com parametros de oct (horas de relogio) e sap
+%pegar imagem do oct para utilizar toda a area de espessura do nervo para usar no diagnostico
 
 \begin{figure}[!tp]
   \centering
@@ -155,7 +161,7 @@ No diagnóstico de glaucoma, o OCT é empregado para identificar alterações na
 
 %o que sao redes convolucionais
 %explicar cada tipo de camada
-
+%imagens das saidas em cada convolucional
 
 
   \subsection{Transfer Learning}
@@ -172,9 +178,9 @@ No diagnóstico de glaucoma, o OCT é empregado para identificar alterações na
 %utilizando caffe
 %qual o objetivo dos experimentos, como foi avaliado
 
-Os experimentos foram conduzidos em um servidor com Ubuntu 16.04 com duas GPUs NVidia Quadro K5200 com 8GB de memória cada, 24 CPUs Intel Xeon e 128GB de memória RAM. O framework de deep learning utilizado em todos os experimentos foi o Caffe, fornecido pela universidade de Berkeley \cite{jia2014caffe}.
+% Os experimentos foram conduzidos em um servidor com Ubuntu 16.04 com duas GPUs NVidia Quadro K5200 com 8GB de memória cada, 24 CPUs Intel Xeon e 128GB de memória RAM. O framework de deep learning utilizado em todos os experimentos foi o Caffe, fornecido pela universidade de Berkeley \cite{jia2014caffe}.
 
-O objetivo dos experimentos, com e sem transfer learning, é a classificação binária de olhos normais ou com glaucoma em imagens de OCT. A performance das redes foram avaliadas utilizando um conjunto menor de imagens não vistas para classificação e cálculo das métricas de avaliação. O mesmo conjunto de imagens é utilizado em todos os experimentos. O dataset, pré-processamento e resultados são descritos em detalhes nas próximas seções.
+% O objetivo dos experimentos, com e sem transfer learning, é a classificação binária de olhos normais ou com glaucoma em imagens de OCT. A performance das redes foram avaliadas utilizando um conjunto menor de imagens não vistas para classificação e cálculo das métricas de avaliação. O mesmo conjunto de imagens é utilizado em todos os experimentos. O dataset, pré-processamento e resultados são descritos em detalhes nas próximas seções.
 
   \subsection{Dataset}
 
@@ -192,7 +198,11 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
   % subtração da media
   % areas pretas para zero absoluto
 
-  Para utilização do transfer learning, foi necessário fazer a subtração do pixel médio em todas as imagens do dataset de treino. O valor médio de cada pixel da imagem é calculado sobre todas as imagens do dataset de treino. Essa imagem média é então subtraída de cada imagem do dataset. Dessa forma, todos os pixels de entrada estão na mesma ordem de grandeza, evitando que os gradientes desapareçam ou explodam.
+  %formula do calculo do pixel medio
+  
+  %gerar saida da imagem media, calcular desvio padrao, gerar imagens com media+desvio padrao e media-desvio padrao
+  
+  Para utilização do transfer learning, foi necessário fazer a subtração do pixel médio em todas as imagens do dataset de treino. O valor (médio de cada pixel da imagem) é calculado sobre todas as imagens do dataset de treino. Essa imagem média é então subtraída de cada imagem do dataset. Dessa forma, todos os pixels de entrada estão na mesma ordem de grandeza, evitando que os gradientes desapareçam ou explodam.
 
   Onde houveram falhas na aquisição da imagem, gerando áreas escuras, pixels com valores RGB próximos ao preto foram substituídos pelo valor de preto absoluto RGB (0, 0, 0) para que não tenham influência sobre a decisão do classificador.
 
@@ -202,22 +212,22 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
   %iterações e tempo de processamento
   %grafico da acuracia
 
-  \begin{figure*}[!t]
-    \centering
-    \subfloat[Imagem original de olho com glaucoma]{\includegraphics[width=1.5in]{img/p0042.png}%
-    \label{fig:original_glaucoma}}
-    \hfil
-    \subfloat[Olho normal classificado corretamente]{\includegraphics[width=1.5in]{img/img_00004_0_0.png}%
-    \label{fig:normal_correto}}
-    \hfil
-    \subfloat[Olho com glaucoma classificado corretamente]{\includegraphics[width=1.5in]{img/img_00002_1_1.png}%
-    \label{fig:glaucoma_normal}}
-    \hfil
-    \subfloat[Olho normal classificado como glaucoma]{\includegraphics[width=1.5in]{img/img_00010_0_1.png}%
-    \label{fig:normal_errado}}
-    \caption{Exemplos de imagens classificadas pela rede com transfer learning. Imagem \ref{fig:original_glaucoma} mostra um exemplo antes da subtração da imagem média. Figuras \ref{fig:normal_correto} à \ref{fig:normal_errado} mostram exemplos classificados durante a validação da rede.}
-    \label{fig:imagens_rede}
-  \end{figure*}
+  % \begin{figure*}[!t]
+  %   \centering
+  %   \subfloat[Imagem original de olho com glaucoma]{\includegraphics[width=1.5in]{img/p0042.png}%
+  %   \label{fig:original_glaucoma}}
+  %   \hfil
+  %   \subfloat[Olho normal classificado corretamente]{\includegraphics[width=1.5in]{img/img_00004_0_0.png}%
+  %   \label{fig:normal_correto}}
+  %   \hfil
+  %   \subfloat[Olho com glaucoma classificado corretamente]{\includegraphics[width=1.5in]{img/img_00002_1_1.png}%
+  %   \label{fig:glaucoma_normal}}
+  %   \hfil
+  %   \subfloat[Olho normal classificado como glaucoma]{\includegraphics[width=1.5in]{img/img_00010_0_1.png}%
+  %   \label{fig:normal_errado}}
+  %   \caption{Exemplos de imagens classificadas pela rede com transfer learning. Imagem \ref{fig:original_glaucoma} mostra um exemplo antes da subtração da imagem média. Figuras \ref{fig:normal_correto} à \ref{fig:normal_errado} mostram exemplos classificados durante a validação da rede.}
+  %   \label{fig:imagens_rede}
+  % \end{figure*}
 
   Neste experimento, utilizamos a mesma arquitetura da rede VGG16, alterando a saída da última camada totalmente conectada para duas saídas, correspondente às duas classes a serem classificadas: normal e glaucoma. A camada de entrada da rede também foi alterada para a resolução das imagens do nosso dataset. As imagens do dataset Imagenet com que a rede foi treinada tinham a resolução de 224x224 pixels, enquanto que as imagens de OCT têm resolução de 136x136 pixels.
   
@@ -232,7 +242,7 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
 
   Onde $base\_lr$ é a taxa de aprendizagem inicial, $\gamma$ é um parâmetro do Caffe definido com o valor $0.1$, $iter$ é o número da iteração atual e $step$ é um parâmetro definido como $1000$.
 
-  A validação do modelo foi feita utilizando um dataset de 24 imagens não vistas pelo algoritmo durante a fasee de treinamento. Foi obtida acurácia final de $95.8\%$, com sensibilidade de $100\%$ e especificidade de $92.3\%$. A figura \ref{fig:imagens_rede} mostra exemplos de imagens classificadas pela rede durante a fase de validação. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de perda e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de perda do treinamento chega próximo à zero.
+  A validação do modelo foi feita utilizando um dataset de 24 imagens não vistas pelo algoritmo durante a fasee de treinamento. Foi obtida acurácia final de $95.8\%$, com sensibilidade de $100\%$ e especificidade de $92.3\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de perda e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de perda do treinamento chega próximo à zero.
 
   \begin{figure}[!tp]
     \centering
@@ -243,7 +253,7 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
 
   \subsection{Resultados sem transfer learning}
 
-  No experimento sem transfer learning, foi utilizada a mesma arquitetura de r  ede VGG16, porém sem utilizar os pesos pré-treinados. As camadas convolucionais foram inicializadas utilizando o algoritmo xavier \cite{xavier2010}, as últimas camadas totalmente conectadas foram inicializadas utilizando valores de distribuição normal com desvio padrão $0.01$.
+  No experimento sem transfer learning, foi utilizada a mesma arquitetura de rede VGG16, porém sem utilizar os pesos pré-treinados. As camadas convolucionais foram inicializadas utilizando o algoritmo xavier \cite{xavier2010}, as últimas camadas totalmente conectadas foram inicializadas utilizando valores de distribuição normal com desvio padrão $0.01$.
 
   O treino foi realizado com $10000$ iterações, utilizando mini batches de 20 imagens e gradiende descendente estocástico. A taxa de aprendizagem foi inicializada em $0.1$ e diminuída a cada $5000$ iterações, utilizando a equação \ref{eq:learning_rate}. Os parâmetros de momentum e e weight decay não foram alterados, utilizando os mesmos definidos no experimento com transfer learning. Para evitar que os gradientes aumentassem muito, foi utilizada a técnica de gradient clipping para que os gradientes não sejam maior que $1$.
 
@@ -253,8 +263,7 @@ O objetivo dos experimentos, com e sem transfer learning, é a classificação b
 \section{Discussão}
 
 %dificuldades para definir os parametros corretos de treinamento
-%dataset pequeno
-%tempo de treinamento(?)
+%dataset pequeno, precisa de mais dados
 
 
 
