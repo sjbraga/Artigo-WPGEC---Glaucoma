@@ -89,7 +89,7 @@
   url       = {http://science.sciencemag.org/content/254/5035/1178},
 }
 
-@Article{doi:10.1001/archopht.118.1.22,
+@Article{bowd2000,
   author  = {Bowd C and Weinreb RN and Williams JM and Zangwill LM},
   title   = {The retinal nerve fiber layer thickness in ocular hypertensive, normal, and glaucomatous eyes with optical coherence tomography},
   journal = {Archives of Ophthalmology},
@@ -100,6 +100,35 @@
   doi     = {10.1001/archopht.118.1.22},
   eprint  = {/data/journals/ophth/9867/ecs90044.pdf},
   url     = { + http://dx.doi.org/10.1001/archopht.118.1.22},
+}
+
+@Article{Asaoka2016,
+  author        = {Ryo Asaoka and Hiroshi Murata and Aiko Iwase and Makoto Araie},
+  title         = {Detecting Preperimetric Glaucoma with Standard Automated Perimetry Using a Deep Learning Classifier},
+  journal       = {Ophthalmology},
+  year          = {2016},
+  volume        = {123},
+  number        = {9},
+  pages         = {1974--1980},
+  month         = {sep},
+  __markedentry = {[Samira:1]},
+  doi           = {10.1016/j.ophtha.2016.05.029},
+  file          = {:Asaoka2016 - Detecting Preperimetric Glaucoma with Standard Automated Perimetry Using a Deep Learning Classifier.pdf:PDF},
+  publisher     = {Elsevier {BV}},
+  url           = {http://dx.doi.org/10.1016/j.ophtha.2016.05.029},
+}
+
+@Article{doi:10.1167/iovs.07-1083,
+  author  = {Bowd, Christopher and Hao, Jiucang and Tavares, Ivan M. and Medeiros, Felipe A. and Zangwill, Linda M. and Lee, Te-Won and Sample, Pamela A. and Weinreb, Robert N. and Goldbaum, Michael H.},
+  title   = {Bayesian Machine Learning Classifiers for Combining Structural and Functional Measurements to Classify Healthy and Glaucomatous Eyes},
+  journal = {Investigative Ophthalmology \& Visual Science},
+  year    = {2008},
+  volume  = {49},
+  number  = {3},
+  pages   = {945},
+  doi     = {10.1167/iovs.07-1083},
+  eprint  = {/data/journals/iovs/933445/z7g00308000945.pdf},
+  url     = { + http://dx.doi.org/10.1167/iovs.07-1083},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

@@ -140,12 +140,13 @@ palavra 1; palavra 2.
 
 Glaucoma é uma neuropatia óptica crônica multifatorial e de lenta progressão que causa perda de campo visual periférico e é a segunda maior causa de cegueira no mundo, estima-se que atingirá 79,6 milhões de pessoas até 2020 \cite{Quigley2006}. Essa doença caracteriza-se pela perda da camada de fibras nervosas no olho, o que pode causar cegueira se não for tratado corretamente \cite{Quigley2011}. O dano na camada de fibras nervosas se dá antes de alteração no campo visual do paciente, por isso o diagnóstico precoce é um fator importante para evitar a perda da visão \cite{Malik2012}.
 
-O glaucoma é diagnosticado por meio de do exame perimetria computadorizada (SAP), que é um exame funcional, e pela tomografia de coerência óptica (OCT), que é um exame estrutural. Os exames funcionais avaliam o campo visual do paciente em busca de reduções na visão. Os exames estruturais avaliam a camada de fibras nervosas para identificar alterações na espessura. Não é simples identificar a existência do glaucoma antes que haja dano ao campo visual \cite{Populacoes2009}.
+O glaucoma é diagnosticado por meio do exame perimetria computadorizada (SAP), que é um exame funcional, e pela tomografia de coerência óptica (OCT), que é um exame estrutural. Os exames funcionais avaliam o campo visual do paciente em busca de reduções na visão. Os exames estruturais avaliam a camada de fibras nervosas para identificar alterações na espessura. Não é simples identificar a existência do glaucoma antes que haja dano ao campo visual \cite{Populacoes2009}.
 
-No diagnóstico de glaucoma, o OCT é empregado para identificar alterações na espessura da camada de fibras nervosas. No exame é analisada uma faixa circular ao longo do nervo óptico e feita a projeção da espessura em cada ponto. Na figura \ref{fig:oct} temos um exemplo de saída de um equipamento de OCT, onde são exibidos os gráficos de espessura em mícrons. 
+O OCT é empregado para identificar alterações na espessura da camada de fibras nervosas. No exame, utiliza-se o princípio da interferometria luminosa para medir as espessuras das estruturas intraoculares. Ao realizar uma varredura, o equipamento emite feixes de laser infravermelho e mede o tempo que a luz leva para ser refletida. A cada estrutura atravessada, uma parte dessa luz é refletida de volta, é feito então o cálculo da espessura da estrutura com base em um feixe de luz de referência e o quanto de luz foi refletido de volta \cite{huang1991}. 
 
-O OCT utiliza feixe de laserpara medir as espessuras das diferentes estruturas através do tempo que cada uma leva para refletir de volta a luz \cite{huang1991}.   %explicar a saida do exame
+Durante o exame com um equipamento de alta definição, são realizadas $200$ varreduras lineares verticais e $200$ horizontais em uma área de 6mm centralizado no disco óptico, após isso é gerada uma saída como na figura \ref{fig:oct}. O primeiro gráfico no topo representa o mapa de espessuras de toda a área analisada, as áreas sem azul indicam espessuras próximas a $0$ e áreas amarelas e vermelhas indicam espessuras entre $175$ e $350$ mícrons. O disco central em cinza representa a fóvea, ponto cego do olho de onde sai o nervo óptico. Abaixo do mapa de espessuras está a o mapa de desvio, mostra as áreas onde a espessura está diferente da população normal, de acordo com um banco de dados normativo do software do equipamento. Também nesse gráfico está representada a linha círcular de onde são retirados os pontos para a representação da espessura nos gráficos na parte de baixo da saída. Esses gráficos mostram a espessura ao longo da circunferência, com centro no nervo óptico. A partir dos ponto dessa circunferência, são gerados os gráficos de quadrantes e horas de relógio, que representam as espessuras médias em cada região.
 
+É possível utilizar classificadores de aprendizagem de máquina para fazer o diagnóstico de glaucoma com base nos exames de OCT e SAP. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{bowd2008,Populacoes2009}. Não foi encontrado na literatura o uso dos valores de espessura de toda a área medida pelo OCT como entradas para um classificador. 
 
 % classificadores com parametros de oct (horas de relogio) e sap
 %pegar imagem do oct para utilizar toda a area de espessura do nervo para usar no diagnostico
@@ -153,7 +154,7 @@ O OCT utiliza feixe de laserpara medir as espessuras das diferentes estruturas a
 \begin{figure}[!tp]
   \centering
   \includegraphics[width=2.5in]{img/oct.png}
-  \caption{Saída de um exame de OCT \cite{Populacoes2009}.}
+  \caption{Saída de um exame de OCT.}
   \label{fig:oct}
 \end{figure}
 
@@ -162,6 +163,30 @@ O OCT utiliza feixe de laserpara medir as espessuras das diferentes estruturas a
 %o que sao redes convolucionais
 %explicar cada tipo de camada
 %imagens das saidas em cada convolucional
+
+
+\begin{figure*}[!t]
+  \centering
+  \subfloat[Imagem de entrada da rede]{\includegraphics[width=1in]{img/conv/data}%
+  \label{fig:data}}
+  \hfil
+  \subfloat[Imagem de saída da primeira camada convolucional]{\includegraphics[width=1in]{img/conv/conv1_1}%
+  \label{fig:conv1}}
+  \hfil
+  \subfloat[Imagem de saída da segunda camada convolucional]{\includegraphics[width=1in]{img/conv/conv2_1}%
+  \label{fig:conv2}}
+  \hfil
+  \subfloat[Imagem de saída da terceira camada convolucional]{\includegraphics[width=1in]{img/conv/conv3_1}%
+  \label{fig:conv3}}
+  \hfil
+  \subfloat[Imagem de saída da quarta camada convolucional]{\includegraphics[width=1in]{img/conv/conv4_1}%
+  \label{fig:conv4}}
+  \hfil
+  \subfloat[Imagem de saída da quinta camada convolucional]{\includegraphics[width=1in]{img/conv/conv5_1}%
+  \label{fig:conv4}}
+  \caption{Exemplos de saídas de cada camada convolucional ao longo da rede.}
+  \label{fig:imagens_rede}
+\end{figure*}
 
 
   \subsection{Transfer Learning}
@@ -212,22 +237,6 @@ O OCT utiliza feixe de laserpara medir as espessuras das diferentes estruturas a
   %iterações e tempo de processamento
   %grafico da acuracia
 
-  % \begin{figure*}[!t]
-  %   \centering
-  %   \subfloat[Imagem original de olho com glaucoma]{\includegraphics[width=1.5in]{img/p0042.png}%
-  %   \label{fig:original_glaucoma}}
-  %   \hfil
-  %   \subfloat[Olho normal classificado corretamente]{\includegraphics[width=1.5in]{img/img_00004_0_0.png}%
-  %   \label{fig:normal_correto}}
-  %   \hfil
-  %   \subfloat[Olho com glaucoma classificado corretamente]{\includegraphics[width=1.5in]{img/img_00002_1_1.png}%
-  %   \label{fig:glaucoma_normal}}
-  %   \hfil
-  %   \subfloat[Olho normal classificado como glaucoma]{\includegraphics[width=1.5in]{img/img_00010_0_1.png}%
-  %   \label{fig:normal_errado}}
-  %   \caption{Exemplos de imagens classificadas pela rede com transfer learning. Imagem \ref{fig:original_glaucoma} mostra um exemplo antes da subtração da imagem média. Figuras \ref{fig:normal_correto} à \ref{fig:normal_errado} mostram exemplos classificados durante a validação da rede.}
-  %   \label{fig:imagens_rede}
-  % \end{figure*}
 
   Neste experimento, utilizamos a mesma arquitetura da rede VGG16, alterando a saída da última camada totalmente conectada para duas saídas, correspondente às duas classes a serem classificadas: normal e glaucoma. A camada de entrada da rede também foi alterada para a resolução das imagens do nosso dataset. As imagens do dataset Imagenet com que a rede foi treinada tinham a resolução de 224x224 pixels, enquanto que as imagens de OCT têm resolução de 136x136 pixels.
   
