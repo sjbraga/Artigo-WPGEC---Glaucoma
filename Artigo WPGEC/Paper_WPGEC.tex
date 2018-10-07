@@ -146,7 +146,7 @@ O OCT é empregado para identificar alterações na espessura da camada de fibra
 
 Durante o exame com um equipamento de alta definição, são realizadas $200$ varreduras lineares verticais e $200$ horizontais em uma área de 6mm centralizado no disco óptico, após isso é gerada uma saída como na figura \ref{fig:oct}. O primeiro gráfico no topo representa o mapa de espessuras de toda a área analisada, as áreas sem azul indicam espessuras próximas a $0$ e áreas amarelas e vermelhas indicam espessuras entre $175$ e $350$ mícrons. O disco central em cinza representa a fóvea, ponto cego do olho de onde sai o nervo óptico. Abaixo do mapa de espessuras está a o mapa de desvio, mostra as áreas onde a espessura está diferente da população normal, de acordo com um banco de dados normativo do software do equipamento. Também nesse gráfico está representada a linha círcular de onde são retirados os pontos para a representação da espessura nos gráficos na parte de baixo da saída. Esses gráficos mostram a espessura ao longo da circunferência, com centro no nervo óptico. A partir dos ponto dessa circunferência, são gerados os gráficos de quadrantes e horas de relógio, que representam as espessuras médias em cada região.
 
-É possível utilizar classificadores de aprendizagem de máquina para fazer o diagnóstico de glaucoma com base nos exames de OCT e SAP. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{bowd2008,Populacoes2009}. Não foi encontrado na literatura o uso dos valores de espessura de toda a área medida pelo OCT como entradas para um classificador. 
+É possível utilizar classificadores de aprendizagem de máquina para fazer o diagnóstico de glaucoma com base nos exames de OCT e SAP. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{bowd2008,Populacoes2009}. %Não foi encontrado na literatura o uso dos valores de espessura de toda a área medida pelo OCT como entradas para um classificador. 
 
 % classificadores com parametros de oct (horas de relogio) e sap
 %pegar imagem do oct para utilizar toda a area de espessura do nervo para usar no diagnostico
@@ -158,12 +158,7 @@ Durante o exame com um equipamento de alta definição, são realizadas $200$ va
   \label{fig:oct}
 \end{figure}
 
-\section{Redes neurais profundas}
-
-%o que sao redes convolucionais
-%explicar cada tipo de camada
-%imagens das saidas em cada convolucional
-
+\section{Redes neurais convolucionais}
 
 \begin{figure*}[!t]
   \centering
@@ -183,10 +178,29 @@ Durante o exame com um equipamento de alta definição, são realizadas $200$ va
   \label{fig:conv4}}
   \hfil
   \subfloat[Imagem de saída da quinta camada convolucional]{\includegraphics[width=1in]{img/conv/conv5_1}%
-  \label{fig:conv4}}
+  \label{fig:conv5}}
   \caption{Exemplos de saídas de cada camada convolucional ao longo da rede.}
   \label{fig:imagens_rede}
 \end{figure*}
+
+%o que sao redes convolucionais
+%explicar cada tipo de camada
+%imagens das saidas em cada convolucional
+
+Redes neurais profundas estão sendo amplamente utilizadas em diversos domínios para classificação e detecção de objetos, principalmente em visão computacional e reconhecimento e processamento de linguagem natural. Essas redes consistem em várias camadas conectadas que aprendem a reconhecer padrões nos dados apresentados, sejam eles imagens ou sons. O principal tipo de rede utilizado é a rede neural convolucional (RNC). As RNCs mostraram ser excelentes ferramentas no processamento de imagens, inclusive na área médica, sendo utilizadas para classificação, detecção de objetos e segmentação \cite{greenspan2016}. Esse sucesso deve-se principalmente à utilização de grandes quantidades de exemplos de treinamento, que permitem que a rede aprenda a reconhecer características a partir dos dados brutos das imagens. %raw data?
+
+As RNCs são compostas de várias conectadas, os principais tipos de camadas são as convolucionais, pooling e as camadas totalmente conectadas. As camadas convolucionais servem como filtros para identificar as características das imagens, como curvas, bordas e cores. As saídas das camadas convolucionais são mapas de características identificadas na imagem de entrada. A convolução é feita utilizando uma máscara (ou kernel) que desliza por todos os pixels da imagem múltiplicando os valores do pixel pelos valores da máscara. Essa múltiplicação é feita em toda a imagem com diferentes kernels, gerando assim as saídas dos diferentes filtros.
+
+Após a identificação dessas características, a camada de pooling agrupa as características similares e reduz a resolução da imagem. Também utilizando uma máscara, a operação de pooling irá calcular o valor máximo em cada região da imagem, agrupando características similares em um mesmo pixel. Na figura \ref{fig:imagens_rede} é possível acompanhar o agrupamento de características e a redução da resolução da imagem ao longo de 5 camadas convolucionais e pooling.
+
+
+
+\begin{figure}[!tp]
+  \centering
+  \includegraphics[width=2.5in]{img/convolucao.png}
+  \caption{Esquema de camadas de uma rede neural convolucional.}
+  \label{fig:convolucao}
+\end{figure}
 
 
   \subsection{Transfer Learning}
