@@ -2,24 +2,8 @@
 
 % *** GRAPHICS RELATED PACKAGES ***
 %
-\ifCLASSINFOpdf
-   \usepackage[pdftex]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
-\else
-  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
-  % will default to the driver specified in the system graphics.cfg if no
-  % driver is specified.
-  % \usepackage[dvips]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../eps/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.eps}
-\fi
+\usepackage[pdftex]{graphicx}
+
 
 % *** MATH PACKAGES ***
 %
@@ -59,25 +43,10 @@
 
 \begin{document}
 
-%
-% paper title
-% Titles are generally capitalized except for words such as a, an, and, as,
-% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
-% not capitalized unless they are the first or last word of the title.
-% Linebreaks \\ can be used within to get better formatting as desired.
-% Do not put math or special symbols in the title.
+
 \title{Paper title - English \\ T\'{i}tulo do artigo - somente para documento escrito em Portugu\^{e}s}
 
 
-
-% conference papers do not typically use \thanks and this command
-% is locked out in conference mode. If really needed, such as for
-% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
-% after \documentclass
-
-% for over three affiliations, or if they all won't fit within the width
-% of the page, use this alternative format:
-% 
 \author{\IEEEauthorblockN{BRAGA, Samira J.\IEEEauthorrefmark{1};
 GOMI, Edson S.\IEEEauthorrefmark{1}}
 \IEEEauthorblockA{\IEEEauthorrefmark{1}Escola Politécnica da Universidade de São Paulo}}
@@ -88,8 +57,6 @@ GOMI, Edson S.\IEEEauthorrefmark{1}}
 
 \thispagestyle{fancy}
 
-% As a general rule, do not put math, special symbols or citations
-% in the abstract
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
 Abstract here.
@@ -146,7 +113,7 @@ O OCT é empregado para identificar alterações na espessura da camada de fibra
 
 Durante o exame com um equipamento de alta definição, são realizadas $200$ varreduras lineares verticais e $200$ horizontais em uma área de 6mm centralizado no disco óptico, após isso é gerada uma saída como na figura \ref{fig:oct}. O primeiro gráfico no topo representa o mapa de espessuras de toda a área analisada, as áreas sem azul indicam espessuras próximas a $0$ e áreas amarelas e vermelhas indicam espessuras entre $175$ e $350$ mícrons. O disco central em cinza representa a fóvea, ponto cego do olho de onde sai o nervo óptico. Abaixo do mapa de espessuras está a o mapa de desvio, mostra as áreas onde a espessura está diferente da população normal, de acordo com um banco de dados normativo do software do equipamento. Também nesse gráfico está representada a linha círcular de onde são retirados os pontos para a representação da espessura nos gráficos na parte de baixo da saída. Esses gráficos mostram a espessura ao longo da circunferência, com centro no nervo óptico. A partir dos ponto dessa circunferência, são gerados os gráficos de quadrantes e horas de relógio, que representam as espessuras médias em cada região.
 
-É possível utilizar classificadores de aprendizagem de máquina para fazer o diagnóstico de glaucoma com base nos exames de OCT e SAP. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{bowd2008,Populacoes2009}. %Não foi encontrado na literatura o uso dos valores de espessura de toda a área medida pelo OCT como entradas para um classificador. 
+É possível utilizar classificadores de aprendizagem de máquina para fazer o diagnóstico de glaucoma com base nos exames de OCT e SAP. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{Populacoes2009,bowd2008}. %Não foi encontrado na literatura o uso dos valores de espessura de toda a área medida pelo OCT como entradas para um classificador. 
 
 % classificadores com parametros de oct (horas de relogio) e sap
 %pegar imagem do oct para utilizar toda a area de espessura do nervo para usar no diagnostico
@@ -187,17 +154,17 @@ Durante o exame com um equipamento de alta definição, são realizadas $200$ va
 %explicar cada tipo de camada
 %imagens das saidas em cada convolucional
 
-Redes neurais profundas estão sendo amplamente utilizadas em diversos domínios para classificação e detecção de objetos, principalmente em visão computacional e reconhecimento e processamento de linguagem natural. Essas redes consistem em várias camadas conectadas que aprendem a reconhecer padrões nos dados apresentados, sejam eles imagens ou sons. O principal tipo de rede utilizado é a rede neural convolucional (RNC). As RNCs mostraram ser excelentes ferramentas no processamento de imagens, inclusive na área médica, sendo utilizadas para classificação, detecção de objetos e segmentação \cite{greenspan2016}. Esse sucesso deve-se principalmente à utilização de grandes quantidades de exemplos de treinamento, que permitem que a rede aprenda a reconhecer características a partir dos dados brutos das imagens. %raw data?
+Redes neurais profundas estão sendo amplamente utilizadas em diversos domínios para classificação e detecção de objetos, principalmente em visão computacional e reconhecimento e processamento de linguagem natural. Essas redes consistem em várias camadas conectadas que aprendem a reconhecer padrões nos dados apresentados, sejam eles imagens ou sons. O principal tipo de rede utilizado é a rede neural convolucional (RNC). As RNCs mostraram ser excelentes ferramentas no processamento de imagens, inclusive na área médica, sendo utilizadas para classificação, detecção de objetos e segmentação. Esse sucesso deve-se principalmente à utilização de grandes quantidades de exemplos de treinamento, que permitem que a rede aprenda a reconhecer características a partir dos dados brutos das imagens \cite{greenspan2016}. %raw data?
 
-As RNCs são compostas de várias conectadas, os principais tipos de camadas são as convolucionais, pooling e as camadas totalmente conectadas. As camadas convolucionais servem como filtros para identificar as características das imagens, como curvas, bordas e cores. As saídas das camadas convolucionais são mapas de características identificadas na imagem de entrada. A convolução é feita utilizando uma máscara (ou kernel) que desliza por todos os pixels da imagem múltiplicando os valores do pixel pelos valores da máscara. Essa múltiplicação é feita em toda a imagem com diferentes kernels, gerando assim as saídas dos diferentes filtros.
+As RNCs são compostas de várias camadas conectadas, sendo os principais tipos as convolucionais, pooling e as camadas totalmente conectadas. As camadas convolucionais servem como filtros para identificar as características das imagens, como curvas, bordas e cores. As saídas das camadas convolucionais são mapas de características identificadas na imagem de entrada. A convolução é feita utilizando uma máscara (ou kernel) que desliza por todos os pixels da imagem múltiplicando os valores do pixel pelos valores da máscara. Essa múltiplicação é feita em toda a imagem com diferentes máscaras, gerando assim as saídas dos diferentes filtros em cada camada de convolução.
 
-Após a identificação dessas características, a camada de pooling agrupa as características similares e reduz a resolução da imagem. Também utilizando uma máscara, a operação de pooling irá calcular o valor máximo em cada região da imagem, agrupando características similares em um mesmo pixel. Na figura \ref{fig:imagens_rede} é possível acompanhar o agrupamento de características e a redução da resolução da imagem ao longo de 5 camadas convolucionais e pooling.
+Após a identificação dessas características, a camada de pooling agrupa as características e reduz a resolução da imagem. Também utilizando uma máscara, a operação de pooling irá calcular o valor máximo em cada região da imagem, agrupando características similares em um mesmo pixel. Na figura \ref{fig:imagens_rede} é possível acompanhar o agrupamento de características e a redução da resolução da imagem ao longo de 5 camadas convolucionais e pooling.
 
-
+As camadas totalmente conectadas recebem todas as características identificadas nas imagens e fazem a classificação final. A saída dessa camada será um vetor com o número de classes a serem classificadas, cada classe terá um valor de probabilidade sendo o maior valor a classe identificada para a imagem. O desenho de uma configuração de rede convolucional profunda pode ser visto na figura \ref{fig:convolucao}. Várias camadas de convolução e pooling utilizando ativações por ReLU (Rectified Linear Unit) são seguidas por duas ou mais camadas totalmente conectadas.
 
 \begin{figure}[!tp]
   \centering
-  \includegraphics[width=2.5in]{img/convolucao.png}
+  \includegraphics[width=3in]{img/convolucao.png}
   \caption{Esquema de camadas de uma rede neural convolucional.}
   \label{fig:convolucao}
 \end{figure}
@@ -206,6 +173,12 @@ Após a identificação dessas características, a camada de pooling agrupa as c
   \subsection{Transfer Learning}
 
   %como e feito transfer learning
+
+  Para treinar uma rede convolucional com muitas camadas e milhões de parâmetros é necessário ter um conjunto muito grande de exemplos de treinamento para que não haja problemas de convergência. Redes como a GoogleLeNet e VGG foram treinadas com datasets como o ImageNet com 14 milhões de imagens distribuidas em 1000 categorias \cite{ILSVRC15}. No entanto, imagens médicas são muito mais difíceis de se obter, principalmente com anotações de classes, devido ao tempo para realizar os estudos e para anotar as imagens.
+  
+  Uma alternativa para a utilização de redes profundas com um dataset menor é a utilização do transfer learning. Essa técnica consiste em usar uma rede treinada com um dataset grande de imagens em um domínio mais amplo e transferir esse conhecimento de características mais básicas para um domínio mais específico. Dessa forma, ao invés de utilizar inicialização randômica dos parâmetros da rede, utiliza-se os pesos de uma rede já treinada. A utilização de uma rede pré-treinada reduz o tempo de treinamento e a necessidade de um dataset muito grande para o novo objetivo \cite{tan2018}.
+
+  
 
   \subsection{Redes pré-treinadas}
 

@@ -155,7 +155,7 @@
   pages     = {242--264},
 }
 
-@Article{7463094,
+@Article{greenspan2016,
   author   = {H. Greenspan and B. van Ginneken and R. M. Summers},
   title    = {Guest Editorial Deep Learning in Medical Imaging: Overview and Future Promise of an Exciting New Technique},
   journal  = {IEEE Transactions on Medical Imaging},
@@ -168,6 +168,17 @@
   abstract = {The papers in this special section focus on the technology and applications supported by deep learning. Deep learning is a growing trend in general data analysis and has been termed one of the 10 breakthrough technologies of 2013. Deep learning is an improvement of artificial neural networks, consisting of more layers that permit higher levels of abstraction and improved predictions from data. To date, it is emerging as the leading machine-learning tool in the general imaging and computer vision domains. In particular, convolutional neural networks (CNNs) have proven to be powerful tools for a broad range of computer vision tasks. Deep CNNs automatically learn mid-level and high-level abstractions obtained from raw data (e.g., images). Recent results indicate that the generic descriptors extracted from CNNs are extremely effective in object recognition and localization in natural images. Medical image analysis groups across the world are quickly entering the field and applying CNNs and other deep learning methodologies to a wide variety of applications. },
   doi      = {10.1109/TMI.2016.2553401},
   keywords = {Special issues and sections;Machine learning;Computer vision;Biomedical image processing;Data analysis;Artificial neural networks},
+}
+
+@Article{ILSVRC15,
+  author  = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},
+  title   = {{ImageNet Large Scale Visual Recognition Challenge}},
+  journal = {International Journal of Computer Vision (IJCV)},
+  year    = {2015},
+  volume  = {115},
+  number  = {3},
+  pages   = {211-252},
+  doi     = {10.1007/s11263-015-0816-y},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
