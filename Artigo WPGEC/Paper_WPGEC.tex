@@ -154,13 +154,13 @@ Durante o exame com um equipamento de alta definição, são realizadas $200$ va
 %explicar cada tipo de camada
 %imagens das saidas em cada convolucional
 
-Redes neurais profundas estão sendo amplamente utilizadas em diversos domínios para classificação e detecção de objetos, principalmente em visão computacional e reconhecimento e processamento de linguagem natural. Essas redes consistem em várias camadas conectadas que aprendem a reconhecer padrões nos dados apresentados, sejam eles imagens ou sons. O principal tipo de rede utilizado é a rede neural convolucional (RNC). As RNCs mostraram ser excelentes ferramentas no processamento de imagens, inclusive na área médica, sendo utilizadas para classificação, detecção de objetos e segmentação. Esse sucesso deve-se principalmente à utilização de grandes quantidades de exemplos de treinamento, que permitem que a rede aprenda a reconhecer características a partir dos dados brutos das imagens \cite{greenspan2016}. %raw data?
+Redes neurais profundas estão sendo amplamente utilizadas em diversos domínios para classificação e detecção de objetos, principalmente em visão computacional e reconhecimento e processamento de linguagem natural. Essas redes consistem em várias camadas conectadas que aprendem a reconhecer padrões nos dados apresentados, sejam eles imagens ou sons \cite{LeCun2015}. O principal tipo de rede utilizado é a rede neural convolucional (RNC). As RNCs mostraram ser excelentes ferramentas no processamento de imagens, inclusive na área médica, sendo utilizadas para classificação, detecção de objetos e segmentação. Esse sucesso deve-se principalmente à utilização de grandes quantidades de exemplos de treinamento, que permitem que a rede aprenda a reconhecer características a partir dos dados brutos das imagens \cite{greenspan2016}. %raw data?
 
 As RNCs são compostas de várias camadas conectadas, sendo os principais tipos as convolucionais, pooling e as camadas totalmente conectadas. As camadas convolucionais servem como filtros para identificar as características das imagens, como curvas, bordas e cores. As saídas das camadas convolucionais são mapas de características identificadas na imagem de entrada. A convolução é feita utilizando uma máscara (ou kernel) que desliza por todos os pixels da imagem múltiplicando os valores do pixel pelos valores da máscara. Essa múltiplicação é feita em toda a imagem com diferentes máscaras, gerando assim as saídas dos diferentes filtros em cada camada de convolução.
 
 Após a identificação dessas características, a camada de pooling agrupa as características e reduz a resolução da imagem. Também utilizando uma máscara, a operação de pooling irá calcular o valor máximo em cada região da imagem, agrupando características similares em um mesmo pixel. Na figura \ref{fig:imagens_rede} é possível acompanhar o agrupamento de características e a redução da resolução da imagem ao longo de 5 camadas convolucionais e pooling.
 
-As camadas totalmente conectadas recebem todas as características identificadas nas imagens e fazem a classificação final. A saída dessa camada será um vetor com o número de classes a serem classificadas, cada classe terá um valor de probabilidade sendo o maior valor a classe identificada para a imagem. O desenho de uma configuração de rede convolucional profunda pode ser visto na figura \ref{fig:convolucao}. Várias camadas de convolução e pooling utilizando ativações por ReLU (Rectified Linear Unit) são seguidas por duas ou mais camadas totalmente conectadas.
+As camadas totalmente conectadas recebem todas as características identificadas nas imagens e fazem a classificação final. A saída dessa camada será um vetor com o número de classes a serem classificadas, cada classe terá um valor de probabilidade sendo o maior valor a classe identificada para a imagem. O desenho de uma configuração de rede convolucional profunda pode ser visto na figura \ref{fig:convolucao}. Várias camadas de convolução e pooling utilizando ativações por ReLU (Rectified Linear Unit) são seguidas por duas ou mais camadas totalmente conectadas. O aumento da quantidade de camadas mostrou-se eficiente no aumento da acurácia de classificação das redes convolucionais \cite{simonyan2014}.
 
 \begin{figure}[!tp]
   \centering
@@ -173,24 +173,28 @@ As camadas totalmente conectadas recebem todas as características identificadas
   \subsection{Transfer Learning}
 
   %como e feito transfer learning
+  %tecnicas: fine tuning, feature extraction
+  %utilizacao em saude
 
-  Para treinar uma rede convolucional com muitas camadas e milhões de parâmetros é necessário ter um conjunto muito grande de exemplos de treinamento para que não haja problemas de convergência. Redes como a GoogleLeNet e VGG foram treinadas com datasets como o ImageNet com 14 milhões de imagens distribuidas em 1000 categorias \cite{ILSVRC15}. No entanto, imagens médicas são muito mais difíceis de se obter, principalmente com anotações de classes, devido ao tempo para realizar os estudos e para anotar as imagens.
+  Para treinar uma rede convolucional com muitas camadas e milhões de parâmetros é necessário ter um conjunto muito grande de exemplos de treinamento para que não haja problemas de convergência. Redes com muitas camadas foram treinadas com datasets como o ImageNet com 14 milhões de imagens distribuidas em 1000 categorias para obter bons resultados \cite{ILSVRC15}. No entanto, imagens médicas são muito mais difíceis de se obter, principalmente com anotações de classes, devido ao tempo para realizar os estudos e para anotar todos os exemplos \cite{greenspan2016}.
   
-  Uma alternativa para a utilização de redes profundas com um dataset menor é a utilização do transfer learning. Essa técnica consiste em usar uma rede treinada com um dataset grande de imagens em um domínio mais amplo e transferir esse conhecimento de características mais básicas para um domínio mais específico. Dessa forma, ao invés de utilizar inicialização randômica dos parâmetros da rede, utiliza-se os pesos de uma rede já treinada. A utilização de uma rede pré-treinada reduz o tempo de treinamento e a necessidade de um dataset muito grande para o novo objetivo \cite{tan2018}.
+  Uma alternativa para a utilização de redes profundas com um dataset menor é a utilização do transfer learning. Essa técnica consiste em usar uma rede treinada com um dataset grande de imagens em um domínio mais amplo e transferir esse conhecimento para um domínio mais específico. Dessa forma, ao invés de utilizar inicialização randômica dos parâmetros da rede, utiliza-se os pesos de uma rede já treinada. A utilização de uma rede pré-treinada reduz o tempo de treinamento e a necessidade de um dataset muito grande para o novo objetivo \cite{tan2018}.
 
-  
+  A aplicação do transfer learning pode ser feita em diversos contextos onde haja dificuldade de obter dados para treinamento. Em um survey, Shao \textit{et al.} \cite{shao2015} relatam diversos usos de transfer learning para treinamento de redes com diferentes domínios alvo. Em oftalmologia, essa técnica mostrou-se eficiente para classificação de retinopatia diabética \cite{li2017} e degeneração macular \cite{lee2017}. Nestes trabalhos foram utilizadas redes pré-treinadas com o dataset ImageNet, o que mostra que é possível utilizar o conhecimento de um domínio de origem mais amplo em uma tarefa específica. 
 
   \subsection{Redes pré-treinadas}
 
   %explicar vgg
+
+  Entre as diversas redes convolucionais já treinadas com o ImageNet, foi escolhida a rede VGG16 para utilização neste experimento. Essa rede foi utilizada para classificação de degeneração macular com imagens de OCT em \cite{lee2017}. Os resultados aprensentados por Lee et al. são promissores, obtendo área sob a curva ROC de 97,46\%.
+
+  A rede VGG16 foi utilizada no ImageNet Large Scale Visual Recognition Challenge (ILSVRC) em 2014, uma competição de reconhecimento de imagens utilizando redes neurais profundas. A rede é composta ao todo de 21 camadas com ativações ReLU, sendo 13 camadas convolucionais, 5 max pooling e 3 camadas totalmente conectadas no final \cite{simonyan2014}.
 
 \section{Experimentos e resultados}
 
 %setup do servidor, quais gpus
 %utilizando caffe
 %qual o objetivo dos experimentos, como foi avaliado
-
-% Os experimentos foram conduzidos em um servidor com Ubuntu 16.04 com duas GPUs NVidia Quadro K5200 com 8GB de memória cada, 24 CPUs Intel Xeon e 128GB de memória RAM. O framework de deep learning utilizado em todos os experimentos foi o Caffe, fornecido pela universidade de Berkeley \cite{jia2014caffe}.
 
 % O objetivo dos experimentos, com e sem transfer learning, é a classificação binária de olhos normais ou com glaucoma em imagens de OCT. A performance das redes foram avaliadas utilizando um conjunto menor de imagens não vistas para classificação e cálculo das métricas de avaliação. O mesmo conjunto de imagens é utilizado em todos os experimentos. O dataset, pré-processamento e resultados são descritos em detalhes nas próximas seções.
 
@@ -199,11 +203,11 @@ As camadas totalmente conectadas recebem todas as características identificadas
   %aumento do dataset, rotações aleatorias entre 0 e 360
   %divisao treino e validação
 
-  O dataset original foi obtido com o departamento de oftalmologia da Unicamp. O dataset consiste de imagens de OCT com tamanho 136x136 de 56 olhos com glaucoma e 66 olhos normais, totalizando 122 pacientes. Os gráficos de espessura de fibras nervosas foram obtidos através da extração das imagens do PDF do exame. Foram selecionados para o experimento somente os olhos de pacientes que foram manualmente classificados por especialistas.
+  O dataset original foi obtido com o departamento de oftalmologia da Unicamp. O dataset consiste de imagens de OCT com tamanho 136x136 de $56$ olhos com glaucoma e $66$ olhos normais, totalizando $122$ pacientes. Os gráficos de espessura de fibras nervosas foram obtidos através da extração das imagens do PDF do exame. Foram selecionados para o experimento somente os olhos de pacientes que foram manualmente classificados por especialistas.
 
-  Para a separação do dataset em treino e validação, foram selecionados 20\% de olhos normais e 20\% de olhos com glaucoma para validação, e o restante para treino, totalizando 98 imagens de treino e 24 para validação. As imagens selecionadas para teste não estão presentes no dataset de treino, para que o algoritmo possa classificar imagens ainda não vistas.
+  Para a separação do dataset em treino e validação, foram selecionados $20\%$ de olhos normais e $20\%$ de olhos com glaucoma para validação, e o restante para treino, totalizando $98$ imagens de treino e $24$ para validação. As imagens selecionadas para teste não estão presentes no dataset de treino, para que o algoritmo possa classificar imagens ainda não vistas.
 
-  Para evitar overfitting, foi empregada uma técnica para aumentar o número de exemplos a partir das imagens no dataset de treino. Cada imagem foi rotacionada 100 vezes em ângulos aleatórios entre 0 e 360 graus, gerando assim um dataset de treino com 9800 imagens. As imagens de validação não foram rotacionadas.
+  Para evitar overfitting, foi empregada uma técnica para aumentar o número de exemplos a partir das imagens no dataset de treino. Cada imagem foi rotacionada $100$ vezes em ângulos aleatórios entre $0$ e $360$ graus, gerando assim um dataset de treino com $9800$ imagens. As imagens de validação não foram rotacionadas.
 
   \subsection{Pré-processamento}
 
@@ -238,7 +242,8 @@ As camadas totalmente conectadas recebem todas as características identificadas
 
   Onde $base\_lr$ é a taxa de aprendizagem inicial, $\gamma$ é um parâmetro do Caffe definido com o valor $0.1$, $iter$ é o número da iteração atual e $step$ é um parâmetro definido como $1000$.
 
-  A validação do modelo foi feita utilizando um dataset de 24 imagens não vistas pelo algoritmo durante a fasee de treinamento. Foi obtida acurácia final de $95.8\%$, com sensibilidade de $100\%$ e especificidade de $92.3\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de perda e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de perda do treinamento chega próximo à zero.
+  %, com sensibilidade de $100\%$ e especificidade de $92.3\%$
+  A validação do modelo foi feita utilizando um dataset de 24 imagens não vistas pelo algoritmo durante a fasee de treinamento. Foi obtida acurácia final de $95.8\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de perda e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de perda do treinamento chega próximo à zero.
 
   \begin{figure}[!tp]
     \centering
@@ -247,11 +252,13 @@ As camadas totalmente conectadas recebem todas as características identificadas
     \label{fig:acuracia_vgg16_transfer}
   \end{figure}
 
-  \subsection{Resultados sem transfer learning}
+  Os experimentos foram conduzidos em um servidor com duas GPUs NVidia Quadro K5200 com 8GB de memória cada, 24 CPUs Intel Xeon e 128GB de memória RAM. O framework de deep learning utilizado em todos os experimentos foi o Caffe, fornecido pela universidade de Berkeley \cite{jia2014caffe}.
 
-  No experimento sem transfer learning, foi utilizada a mesma arquitetura de rede VGG16, porém sem utilizar os pesos pré-treinados. As camadas convolucionais foram inicializadas utilizando o algoritmo xavier \cite{xavier2010}, as últimas camadas totalmente conectadas foram inicializadas utilizando valores de distribuição normal com desvio padrão $0.01$.
+  % \subsection{Resultados sem transfer learning}
 
-  O treino foi realizado com $10000$ iterações, utilizando mini batches de 20 imagens e gradiende descendente estocástico. A taxa de aprendizagem foi inicializada em $0.1$ e diminuída a cada $5000$ iterações, utilizando a equação \ref{eq:learning_rate}. Os parâmetros de momentum e e weight decay não foram alterados, utilizando os mesmos definidos no experimento com transfer learning. Para evitar que os gradientes aumentassem muito, foi utilizada a técnica de gradient clipping para que os gradientes não sejam maior que $1$.
+  % No experimento sem transfer learning, foi utilizada a mesma arquitetura de rede VGG16, porém sem utilizar os pesos pré-treinados. As camadas convolucionais foram inicializadas utilizando o algoritmo xavier \cite{xavier2010}, as últimas camadas totalmente conectadas foram inicializadas utilizando valores de distribuição normal com desvio padrão $0.01$.
+
+  % O treino foi realizado com $10000$ iterações, utilizando mini batches de 20 imagens e gradiende descendente estocástico. A taxa de aprendizagem foi inicializada em $0.1$ e diminuída a cada $5000$ iterações, utilizando a equação \ref{eq:learning_rate}. Os parâmetros de momentum e e weight decay não foram alterados, utilizando os mesmos definidos no experimento com transfer learning. Para evitar que os gradientes aumentassem muito, foi utilizada a técnica de gradient clipping para que os gradientes não sejam maior que $1$.
 
   %iterações e tempo de processamento
   %grafico da acuracia
