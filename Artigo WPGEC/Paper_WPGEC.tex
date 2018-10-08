@@ -220,6 +220,11 @@ As camadas totalmente conectadas recebem todas as características identificadas
   
   Para utilização do transfer learning, foi necessário fazer a subtração do pixel médio em todas as imagens do dataset de treino. O valor (médio de cada pixel da imagem) é calculado sobre todas as imagens do dataset de treino. Essa imagem média é então subtraída de cada imagem do dataset. Dessa forma, todos os pixels de entrada estão na mesma ordem de grandeza, evitando que os gradientes desapareçam ou explodam.
 
+  \begin{equation}
+    P_c = \frac{1}{M * N * I} \sum p_{mni}
+    \label{eq:learning_rate}
+  \end{equation}
+
   Onde houveram falhas na aquisição da imagem, gerando áreas escuras, pixels com valores RGB próximos ao preto foram substituídos pelo valor de preto absoluto RGB (0, 0, 0) para que não tenham influência sobre a decisão do classificador.
 
   \subsection{Resultados com transfer learning}
