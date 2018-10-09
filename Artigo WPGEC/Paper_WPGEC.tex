@@ -154,9 +154,9 @@ Durante o exame com um equipamento de alta definição, são realizadas $200$ va
 %explicar cada tipo de camada
 %imagens das saidas em cada convolucional
 
-Redes neurais profundas estão sendo amplamente utilizadas em diversos domínios para classificação e detecção de objetos, principalmente em visão computacional e reconhecimento e processamento de linguagem natural. Essas redes consistem em várias camadas conectadas que aprendem a reconhecer padrões nos dados apresentados, sejam eles imagens ou sons \cite{LeCun2015}. O principal tipo de rede utilizado é a rede neural convolucional (RNC). As RNCs mostraram ser excelentes ferramentas no processamento de imagens, inclusive na área médica, sendo utilizadas para classificação, detecção de objetos e segmentação. Esse sucesso deve-se principalmente à utilização de grandes quantidades de exemplos de treinamento, que permitem que a rede aprenda a reconhecer características a partir dos dados brutos das imagens \cite{greenspan2016}. %raw data?
+Redes neurais profundas estão sendo amplamente utilizadas em diversos domínios para classificação e detecção de objetos, principalmente em visão computacional e reconhecimento e processamento de linguagem natural. Essas redes consistem em várias camadas conectadas que aprendem a reconhecer padrões nos dados apresentados, sejam eles imagens ou sons \cite{LeCun2015}. O principal tipo de rede utilizado é a rede neural convolucional (Convolutional Neural Network, CNN). As CNNs mostraram ser excelentes ferramentas no processamento de imagens, inclusive na área médica, sendo utilizadas para classificação, detecção de objetos e segmentação. Esse sucesso deve-se principalmente à utilização de grandes quantidades de exemplos de treinamento, que permitem que a rede aprenda a reconhecer características a partir dos dados brutos das imagens \cite{greenspan2016}. %raw data?
 
-As RNCs são compostas de várias camadas conectadas, sendo os principais tipos as convolucionais, pooling e as camadas totalmente conectadas. As camadas convolucionais servem como filtros para identificar as características das imagens, como curvas, bordas e cores. As saídas das camadas convolucionais são mapas de características identificadas na imagem de entrada. A convolução é feita utilizando uma máscara (ou kernel) que desliza por todos os pixels da imagem múltiplicando os valores do pixel pelos valores da máscara. Essa múltiplicação é feita em toda a imagem com diferentes máscaras, gerando assim as saídas dos diferentes filtros em cada camada de convolução.
+As CNNs são compostas de várias camadas conectadas, sendo os principais tipos as convolucionais, pooling e as camadas totalmente conectadas. As camadas convolucionais servem como filtros para identificar as características das imagens, como curvas, bordas e cores. As saídas das camadas convolucionais são mapas de características identificadas na imagem de entrada. A convolução é feita utilizando uma máscara (ou kernel) que desliza por todos os pixels da imagem múltiplicando os valores do pixel pelos valores da máscara. Essa múltiplicação é feita em toda a imagem com diferentes máscaras, gerando assim as saídas dos diferentes filtros em cada camada de convolução.
 
 Após a identificação dessas características, a camada de pooling agrupa as características e reduz a resolução da imagem. Também utilizando uma máscara, a operação de pooling irá calcular o valor máximo em cada região da imagem, agrupando características similares em um mesmo pixel. Na figura \ref{fig:imagens_rede} é possível acompanhar o agrupamento de características e a redução da resolução da imagem ao longo de 5 camadas convolucionais e pooling.
 
@@ -186,9 +186,9 @@ As camadas totalmente conectadas recebem todas as características identificadas
 
   %explicar vgg
 
-  Entre as diversas redes convolucionais já treinadas com o ImageNet, foi escolhida a rede VGG16 para utilização neste experimento. Essa rede foi utilizada para classificação de degeneração macular com imagens de OCT em \cite{lee2017}. Os resultados aprensentados por Lee et al. são promissores, obtendo área sob a curva ROC de 97,46\%.
+  Entre as diversas redes convolucionais já treinadas com o ImageNet, foi escolhida a rede VGG16 para utilização neste experimento. Essa rede foi utilizada para classificação de degeneração macular com imagens de OCT em \cite{lee2017}. Os resultados aprensentados por Lee \textit{et al.} são promissores, obtendo área sob a curva ROC de $97,46\%$.
 
-  A rede VGG16 foi utilizada no ImageNet Large Scale Visual Recognition Challenge (ILSVRC) em 2014, uma competição de reconhecimento de imagens utilizando redes neurais profundas. A rede é composta ao todo de 21 camadas com ativações ReLU, sendo 13 camadas convolucionais, 5 max pooling e 3 camadas totalmente conectadas no final \cite{simonyan2014}.
+  A rede VGG16 foi utilizada no ImageNet Large Scale Visual Recognition Challenge (ILSVRC) em 2014, uma competição de reconhecimento de imagens utilizando redes neurais profundas. A rede é composta ao todo de $21$ camadas com ativações ReLU, sendo $13$ camadas convolucionais, $5$ max pooling e $3$ camadas totalmente conectadas no final, duas com 4096 saídas e a última com 1000 saídas de classificação. Diferente de outras arquiteturas, o VGG16 utiliza filtros menores nas camadas de convolução, o que diminui o número de pesos necessários mas ainda com um poder discriminativo alto. \cite{simonyan2014}.
 
 \section{Experimentos e resultados}
 
@@ -218,11 +218,11 @@ As camadas totalmente conectadas recebem todas as características identificadas
   
   %gerar saida da imagem media, calcular desvio padrao, gerar imagens com media+desvio padrao e media-desvio padrao
   
-  Para utilização do transfer learning, foi necessário fazer a subtração do pixel médio em todas as imagens do dataset de treino. O valor (médio de cada pixel da imagem) é calculado sobre todas as imagens do dataset de treino. Essa imagem média é então subtraída de cada imagem do dataset. Dessa forma, todos os pixels de entrada estão na mesma ordem de grandeza, evitando que os gradientes desapareçam ou explodam.
+  Para utilização do transfer learning, foi necessário fazer a subtração do pixel médio. O pixel médio é calculado sobre todas as imagens do dataset de treino utilizando a equação \ref{eq:mean_pixel}, onde $P_c$ é o valor médio por canal, $M$ e $N$ são as dimensões das imagens de entrada (largura e altura, respectivamente), $I$ é a quantidade total de imagens no dataset de treino, $p_{mni}$ é o valor do pixel na posição m,n na imagem i. O valor do pixel médio é calculado em cada canal RGB da imagem, gerando assim um vetor de 3 posições com um valor médio por canal.
 
   \begin{equation}
     P_c = \frac{1}{M * N * I} \sum p_{mni}
-    \label{eq:learning_rate}
+    \label{eq:mean_pixel}
   \end{equation}
 
   Onde houveram falhas na aquisição da imagem, gerando áreas escuras, pixels com valores RGB próximos ao preto foram substituídos pelo valor de preto absoluto RGB (0, 0, 0) para que não tenham influência sobre a decisão do classificador.
@@ -248,16 +248,16 @@ As camadas totalmente conectadas recebem todas as características identificadas
   Onde $base\_lr$ é a taxa de aprendizagem inicial, $\gamma$ é um parâmetro do Caffe definido com o valor $0.1$, $iter$ é o número da iteração atual e $step$ é um parâmetro definido como $1000$.
 
   %, com sensibilidade de $100\%$ e especificidade de $92.3\%$
-  A validação do modelo foi feita utilizando um dataset de 24 imagens não vistas pelo algoritmo durante a fasee de treinamento. Foi obtida acurácia final de $95.8\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de perda e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de perda do treinamento chega próximo à zero.
+  A validação do modelo foi feita utilizando um dataset de 24 imagens não vistas pelo algoritmo durante a fasee de treinamento. Foi obtida acurácia final de $95.8\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de erro e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de erro do treinamento chega próximo à zero.
 
   \begin{figure}[!tp]
     \centering
     \includegraphics[width=2.5in]{img/curve_vgg16.png}
-    \caption{Acurácia e perda de treino e validação da rede VGG16 com transfer learning.}
+    \caption{Acurácia e erro de treino e validação da rede VGG16 com transfer learning.}
     \label{fig:acuracia_vgg16_transfer}
   \end{figure}
 
-  Os experimentos foram conduzidos em um servidor com duas GPUs NVidia Quadro K5200 com 8GB de memória cada, 24 CPUs Intel Xeon e 128GB de memória RAM. O framework de deep learning utilizado em todos os experimentos foi o Caffe, fornecido pela universidade de Berkeley \cite{jia2014caffe}.
+  Os experimentos foram conduzidos em um servidor com duas GPUs NVidia Quadro K5200 com 8GB de memória cada. O framework de deep learning utilizado para definição da rede e treinamento em todos os experimentos foi o Caffe, desenvolvido em C++ e fornecido pela universidade de Berkeley \cite{jia2014caffe}.
 
   % \subsection{Resultados sem transfer learning}
 
