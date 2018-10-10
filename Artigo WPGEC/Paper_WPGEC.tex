@@ -248,7 +248,7 @@ As camadas totalmente conectadas recebem todas as características identificadas
   Onde $base\_lr$ é a taxa de aprendizagem inicial, $\gamma$ é um parâmetro do Caffe definido com o valor $0.1$, $iter$ é o número da iteração atual e $step$ é um parâmetro definido como $1000$.
 
   %, com sensibilidade de $100\%$ e especificidade de $92.3\%$
-  A validação do modelo foi feita utilizando um dataset de 24 imagens não vistas pelo algoritmo durante a fasee de treinamento. Foi obtida acurácia final de $95.8\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de erro e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de erro do treinamento chega próximo à zero.
+  A validação do modelo foi feita utilizando um dataset de 24 imagens não vistas pelo algoritmo durante a fase de treinamento. Foi obtida acurácia final de $95.8\%$, com apenas uma imagem classificada incorretamente. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de erro e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de erro do treinamento chega próximo à zero.
 
   \begin{figure}[!tp]
     \centering
@@ -274,14 +274,14 @@ As camadas totalmente conectadas recebem todas as características identificadas
 %dataset pequeno, precisa de mais dados
 %pendente validação com outro dataset
 
-O uso das redes neurais profundas tem se expandido e evoluído rapidamente, em oftalmologia, pesquisas recentes têm mostrado resultados promissores, porém, a dificuldade em se obter dados pode limitar o uso dessa ferramenta no diagnóstico. A principal barreira neste estudo foi a quantidade limitada de dados, o que levou à utilização de técnicas para aumentar o dataset artificialmente. Não foi possível determinar se as imagens rotacionadas geraram impacto no poder discriminativo da rede. 
+Neste estudo foi utilizada uma rede convolucional profunda para classificação de pacientes com glaucoma e normais a partir do gráfico de espessuras da camada de fibras nervosas, extraídos de exames de OCT. Para diminuir o tempo de treinamento e a permitir o uso de um dataset reduzido, foi empregada a técnica de transfer learning para inicializar os pesos da rede a partir de uma rede pré-treinada no dataset Imagenet. Para validação da rede foram utilizadas imagens não vistas em treinamento
 
-% Uma das principais dificuldades ao se treinar uma rede neural é a escolha dos parâmetros que forneçam o melhor resultado. 
+O uso das redes neurais profundas tem se expandido e evoluído rapidamente. Em oftalmologia, pesquisas recentes têm mostrado resultados promissores, porém, a dificuldade de se obter dados pode limitar o uso dessa ferramenta no auxilio à diagnóstico. A principal barreira neste estudo foi a quantidade limitada de dados, o que levou à utilização de técnicas para aumentar o dataset artificialmente. Ainda não foi possível determinar se as imagens rotacionadas geraram impacto no aprendizado da rede. Os resultados obtidos sugerem que houve overfitting no dataset de treinamento, sendo necessário o teste em um dataset diferente do utilizado em treinamento.%Além disso, a escolha de parâmetros para treinamento também pode interferir no resultado final do treinamento
 
 
 \section{Conclusão}
 
-%Resultados iniciais mostram que a utilização do gráfico de espessuras da camada de fibras nervosas obtidas de exames de OCT podem melhorar a acurácia de diagnósticos de glaucoma. Como próximos passos são necessárias validações com datasets diferentes, assim como de especialistas em glaucoma. 
+Os resultados iniciais mostram que a utilização do gráfico de espessuras da camada de fibras nervosas obtidos de exames de OCT podem melhorar a acurácia de diagnósticos de glaucoma, porém, validações com outros datasets ainda são necessárias para avaliar a generalização da rede. %Como próximos passos são necessárias validações com datasets diferentes, assim como de especialistas em glaucoma. 
 
 %Use BIB file
 \bibliographystyle{abntex2-num}
