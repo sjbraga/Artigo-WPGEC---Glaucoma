@@ -233,4 +233,70 @@
   url     = {http://www.sciencedirect.com/science/article/pii/S2468653016301749},
 }
 
+@Article{simonyan2014,
+  author        = {Karen Simonyan and Andrew Zisserman},
+  title         = {Very Deep Convolutional Networks for Large-Scale Image Recognition},
+  journal       = {CoRR},
+  year          = {2014},
+  volume        = {abs/1409.1556},
+  archiveprefix = {arXiv},
+  bibsource     = {dblp computer science bibliography, http://dblp.org},
+  biburl        = {http://dblp.org/rec/bib/journals/corr/SimonyanZ14a},
+  eprint        = {1409.1556},
+  timestamp     = {Wed, 07 Jun 2017 14:41:51 +0200},
+  url           = {http://arxiv.org/abs/1409.1556},
+}
+
+@Electronic{convTDS,
+  author  = {Arden Dertat},
+  title   = {Applied Deep Learning - Part 4: Convolutional Neural Networks},
+  url     = {https://towardsdatascience.com/applied-deep-learning-part-4-convolutional-neural-networks-584bc134c1e2},
+  urldate = {13.10.2018},
+}
+
+@Article{kroese2003,
+  author  = {M Kroese and H Burton},
+  title   = {Primary open angle glaucoma. The need for a consensus case definition},
+  journal = {J Epidemiol Community Health},
+  year    = {2003},
+  volume  = {57},
+  pages   = {752-754},
+  file    = {:THEORY2003.pdf:PDF},
+}
+
+@Article{liu2003,
+  author  = {Liu, John H. K. and Zhang, Xiaoyan and Kripke, Daniel F. and Weinreb, Robert N.},
+  title   = {Twenty-four-Hour Intraocular Pressure Pattern Associated with Early Glaucomatous Changes},
+  journal = {Investigative Ophthalmology \& Visual Science},
+  year    = {2003},
+  volume  = {44},
+  number  = {4},
+  pages   = {1586},
+  doi     = {10.1167/iovs.02-0666},
+  eprint  = {/data/journals/iovs/932920/7g0403001586.pdf},
+  url     = { + http://dx.doi.org/10.1167/iovs.02-0666},
+}
+
+@Article{Wollstein2005,
+  author  = {Gadi Wollstein and Joel S. Schuman and Lori L. Price and Ali Aydin and Paul C. Stark and Ellen Hertzmark and Edward Lai Hiroshi Ishikawa Cynthia Mattox James G. Fujimoto Lelia A. Paunescu},
+  title   = {Optical Coherence Tomography Longitudinal Evaluation of Retinal Nerve Fiber Layer Thickness in Glaucoma},
+  journal = {Arch Ophthalmol},
+  year    = {2005},
+  volume  = {123},
+  pages   = {464-471},
+  file    = {:Coherence2016 - CLINICAL SCIENCES.pdf:PDF},
+}
+
+@Article{doi:,
+  author  = {Chauhan, B C and Drance, S M and Douglas, G R},
+  title   = {The use of visual field indices in detecting changes in the visual field in glaucoma.},
+  journal = {Investigative Ophthalmology \& Visual Science},
+  year    = {1990},
+  volume  = {31},
+  number  = {3},
+  pages   = {512},
+  eprint  = {/data/journals/iovs/933577/512.pdf},
+  url     = { + http://dx.doi.org/},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
