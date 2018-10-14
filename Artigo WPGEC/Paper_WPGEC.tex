@@ -158,8 +158,6 @@ O estudo de Gracitelli \textit{et al.} mostra que os parâmetros de média de es
 
 \section{Redes neurais convolucionais}
 
-
-
 %o que sao redes convolucionais
 %explicar cada tipo de camada
 %imagens das saidas em cada convolucional
@@ -188,8 +186,8 @@ As camadas totalmente conectadas recebem todas as características identificadas
   %tecnicas: fine tuning, feature extraction
   %utilizacao em saude
 
-  %dar exemplo do treinamento do VGG ******
-  Para treinar uma CNN é necessário ter um conjunto muito grande de exemplos de treinamento. Redes como GoogLeNet, VGG, AlexNet, foram treinadas com datasets como o ImageNet com 14 milhões de imagens distribuídas em 1000 categorias para obter bons resultados \cite{ILSVRC15}. No entanto, imagens médicas são muito mais difíceis de se obter, principalmente com anotações de classes, devido ao tempo para realizar os estudos e para anotar todos os exemplos \cite{greenspan2016}.
+  %dar exemplo do treinamento do VGG ****** OK
+  Para treinar uma CNN é necessário ter um conjunto muito grande de exemplos para treinamento e teste. As redes VGG foram treinadas utilizando o dataset ILSVRC-2012 \cite{ILSVRC15} que contém 1000 classes e foi dividido em 3 conjuntos: 1.3 milhões de imagens para treino, 50 mil imagens para validação e 100 mil imagens para teste \cite{simonyan2014}. No entanto, imagens médicas são muito mais difíceis de se obter, principalmente com anotações de classes, devido ao tempo para realizar os estudos e para anotar todos os exemplos \cite{greenspan2016}.
   
   Uma alternativa para a utilização de redes profundas com um dataset menor é a utilização do transfer learning. Essa técnica consiste em usar uma rede treinada com um dataset grande de imagens em um domínio mais amplo e transferir esse conhecimento para um domínio mais específico. Dessa forma, ao invés de utilizar inicialização randômica dos parâmetros da rede, utiliza-se os pesos de uma rede já treinada. A utilização de uma rede pré-treinada reduz o tempo de treinamento e a necessidade de um dataset muito grande para o novo objetivo \cite{tan2018}.
 
