@@ -281,6 +281,8 @@ As camadas totalmente conectadas recebem todas as características identificadas
 %dataset pequeno, precisa de mais dados
 %pendente validação com outro dataset
 
+A rede VGG16 foi escolhida para esse experimento por ter obtido bons resultados na classificação de outras doenças oftalmológicas \cite{li2017, lee2017}, porém, outras arquiteturas também podem ser utilizadas. Em um próximo estudo, é possível fazer a comparação com outras redes.
+
 A principal barreira neste estudo foi a quantidade limitada de dados, o que levou à utilização de técnicas para aumentar o dataset artificialmente. Ainda não foi possível determinar se as imagens rotacionadas geraram impacto no aprendizado da rede. 
 
 %test loss alto indica overfitting ********** OK
@@ -288,8 +290,6 @@ A principal barreira neste estudo foi a quantidade limitada de dados, o que levo
 \section{Conclusão}
 
 Os resultados iniciais mostram que houve overfitting no dataset de treinamento, devido ao erro alto obtido no dataset de validação. Um possível motivo para isso é o tamanho reduzido do dataset utilizado. O próximo passo para o estudo será a obtenção de mais imagens para realização de novo treinamento e utilização de outras arquiteturas de CNNs para comparação.
-
-%Os resultados iniciais mostram que a utilização do gráfico de espessuras da camada de fibras nervosas obtidos de exames de OCT podem melhorar a acurácia de diagnósticos de glaucoma, porém, validações com outros datasets ainda são necessárias para avaliar a generalização da rede. Como próximos passos são necessárias validações com datasets diferentes, assim como de especialistas em glaucoma. 
 
 %Use BIB file
 \bibliographystyle{abntex2-num}
