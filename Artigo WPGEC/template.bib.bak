@@ -248,6 +248,8 @@
 
 @Electronic{convTDS,
   author  = {Arden Dertat},
+  month   = nov,
+  year    = {2017},
   title   = {Applied Deep Learning - Part 4: Convolutional Neural Networks},
   url     = {https://towardsdatascience.com/applied-deep-learning-part-4-convolutional-neural-networks-584bc134c1e2},
   urldate = {13.10.2018},
@@ -331,7 +333,7 @@
   url           = {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4460228/},
 }
 
-@Article{comparisonml2002,
+@Article{kwokleung2002,
   author        = {Kwokleung Chan, Te-Won Lee and Pamela A. Sample and Michael H. Goldbaum and Robert N. Weinreb and Terrence J. Sejnowski},
   title         = {Comparison of Machine Learning and Traditional Classifiers in Glaucoma Diagnosis},
   journal       = {{IEEE} Transactions On Biomedical Engineering},
