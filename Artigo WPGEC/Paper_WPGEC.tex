@@ -111,30 +111,10 @@ O objetivo deste trabalho é investigar se é possível fazer o diagnóstico do 
 
 \begin{figure}[!tp]
   \centering
-  \includegraphics[width=2.5in]{img/oct.png}
+  \includegraphics[width=2.5in]{img/oct_regiao.png}
   \caption{Saída de um exame de OCT.}
   \label{fig:oct}
 \end{figure}
-
-%referencia para OCT e para SAP ****** OK
-
-Atualmente, o diagnóstico do glaucoma é feito com uma combinação de exame estrutural, por meio de tomografia de coerência óptica OCT (Optical Coherence Tomography) \cite{Wollstein2005}, e exame funcional, por meio da perimetria computadorizada SAP (Standard Automated Perimetry) \cite{chauhan1990}. Os exames estruturais avaliam a camada de fibras nervosas para identificar alterações na sua espessura e os exames funcionais avaliam o campo visual do paciente em busca de áreas de perda da visão. 
-
-%Não é simples identificar a existência do glaucoma antes que haja dano ao campo visual \cite{Populacoes2009}. 
-O exame OCT utiliza o princípio da interferometria luminosa para medir as espessuras das estruturas intraoculares. Ao realizar uma varredura, o equipamento emite feixes de laser infravermelho e mede o tempo que a luz leva para ser refletida. Em cada estrutura atravessada, uma parte dessa luz é refletida de volta. O cálculo da espessura é baseado na diferença entre o feixe de luz de referência e a luz refletida \cite{huang1991}. 
-
-% arrumar explicação ***************
-Na figura \ref{fig:oct} vemos a saída gerada pelo equipamento Cirrus HD-OCT da Carl Zeiss Meditec Inc. As imagens no topo do relatório apresenta o mapa das espessuras da camada de fibras nervosas. As áreas em azul indicam espessuras próximas a $0$, as áreas amarelas indicam espessuras até 175 mícrons e as áreas vermelhas indicam espessuras entre $175$ e $350$ mícrons. O disco central em cinza é a fóvea, ponto cego do olho de onde sai o nervo óptico. Abaixo do mapa de espessuras está o mapa de desvio que mostra as áreas onde a espessura está diferente da população normal, de acordo com um banco de dados normativo do software do equipamento. Também nesse gráfico está representada a linha circular de onde são retirados os pontos para a representação da espessura nos gráficos na parte de baixo da saída. Esses gráficos mostram a espessura ao longo da circunferência, com centro no nervo óptico. A partir dos ponto dessa circunferência, são gerados os gráficos de quadrantes e horas de relógio, que representam as espessuras médias em cada região \cite{Populacoes2009}.
-
-%medico precisa ter especializacao para avaliar e dar o diagnostico *********** OK
-%auxiliar na tomada de decisão **************** OK
-Nenhum exame fornece resultados definitivos da situação do paciente, necessitando assim da avaliação de um
-profissional oftalmologista especialista em glaucoma para conclusão do resultado. Esta análise não é padronizada e pode variar de acordo com o julgamento do oftalmologista \cite{kroese2003}. É possível utilizar classificadores de aprendizagem de máquina para fazer o diagnóstico de glaucoma para auxiliar na tomada de decisão. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{Populacoes2009,bowd2008}.
-
-% classificadores com parametros de oct (horas de relogio) e sap
-%pegar imagem do oct para utilizar toda a area de espessura do nervo para usar no diagnostico
-
-\section{Redes neurais convolucionais}
 
 \begin{figure*}[!t]
   \centering
@@ -158,6 +138,27 @@ profissional oftalmologista especialista em glaucoma para conclusão do resultad
   \caption{Exemplos de saídas de cada camada convolucional ao longo da rede.}
   \label{fig:imagens_rede}
 \end{figure*}
+
+%referencia para OCT e para SAP ****** OK
+
+Atualmente, o diagnóstico do glaucoma é feito com uma combinação de exame estrutural, por meio de tomografia de coerência óptica OCT (Optical Coherence Tomography) \cite{Wollstein2005}, e exame funcional, por meio da perimetria computadorizada SAP (Standard Automated Perimetry) \cite{chauhan1990}. Os exames estruturais avaliam a camada de fibras nervosas para identificar alterações na sua espessura e os exames funcionais avaliam o campo visual do paciente em busca de áreas de perda da visão. 
+
+%Não é simples identificar a existência do glaucoma antes que haja dano ao campo visual \cite{Populacoes2009}. 
+O exame OCT utiliza o princípio da interferometria luminosa para medir as espessuras das estruturas intraoculares. Ao realizar uma varredura, o equipamento emite feixes de laser infravermelho e mede o tempo que a luz leva para ser refletida. Em cada estrutura atravessada, uma parte dessa luz é refletida de volta. O cálculo da espessura é baseado na diferença entre o feixe de luz de referência e a luz refletida \cite{huang1991}. 
+
+% arrumar explicação *************** OK
+Na figura \ref{fig:oct} vemos a saída gerada pelo equipamento Cirrus HD-OCT da Carl Zeiss Meditec Inc. Na região A, indicada em vermelho, está as imagens de espessuras da camada de fibras nervosas. Essas espessuras são representadas como em um mapa de calor, onde espessuras próximas à $0$ são apresentadas em azul, do verde até o amarelo e laranja são espessuras até $175$ mícrons e de vermelho até aproximar-se do branco representam espessuras de $175$ à $350$ mícrons. O disco central em cinza é a fóvea, ponto cego do olho de onde sai o nervo óptico. Na região B, em laranja, são exibidas as imagens tomográficas da camada de fibras nervosas em um corte circular em volta da fóvea. A região C, em preto, exibe gráficos de espessura na região circular ao redor da fóvea, também chamada de mapa TSNIT (Temporal, Superior, Nasal, Inferior, Temporal). Além do gráfico, são exibidos também as médias de espessura por quadrantes e horas de relógio. As medidas de espessuras são sempre comparadas com o banco de dados normativo do aparelho para indicar se a medida está dentro de 95\% da população normal (em verde), dentro de apenas 5\% da população (em amarelo), ou em apenas 1\% da população (em vermelho) \cite{aref2010}. 
+
+%medico precisa ter especializacao para avaliar e dar o diagnostico *********** OK
+%auxiliar na tomada de decisão **************** OK
+O estudo de Gracitelli \textit{et al.} mostra que os parâmetros de média de espessura por quadrantes ou a média global da espessura da camada de fibras nervosas é amplamente utilizado na análise para diagnóstico do glaucoma \cite{Gracitelli2015}. No entanto, nenhum exame fornece resultados definitivos da situação do paciente, necessitando assim da avaliação de um profissional oftalmologista especialista em glaucoma para conclusão do resultado. Esta análise não é padronizada e pode variar de acordo com o julgamento do oftalmologista \cite{kroese2003}. É possível utilizar classificadores de aprendizagem de máquina para auxiliar na tomada de decisão do oftalmologista. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{Populacoes2009,bowd2008}. Em geral, equipamentos oftalmológicos possuem seus próprios algoritmos para análise e classificação, mas o estudo de Kwokleung Chan \textit{et al.} mostra que algoritmos de classificação são mais eficientes \cite{kwokleung2002}.
+
+% classificadores com parametros de oct (horas de relogio) e sap
+%pegar imagem do oct para utilizar toda a area de espessura do nervo para usar no diagnostico
+
+\section{Redes neurais convolucionais}
+
+
 
 %o que sao redes convolucionais
 %explicar cada tipo de camada
