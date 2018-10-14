@@ -1,5 +1,19 @@
 % Encoding: windows-1252
 
+@Article{silva2013,
+  author    = {Silva, Fabricio R. AND Vidotti, Vanessa G. AND Cremasco, Fernanda AND Dias, Marcelo AND Gomi, Edson S. AND Costa, Vital P.},
+  title     = {{Sensitivity and specificity of machine learning classifiers for glaucoma diagnosis using Spectral Domain OCT and standard automated perimetry}},
+  journal   = {{Arquivos Brasileiros de Oftalmologia}},
+  year      = {2013},
+  volume    = {76},
+  pages     = {170 - 174},
+  month     = {06},
+  issn      = {0004-2749},
+  language  = {en},
+  publisher = {scielo},
+  url       = {http://www.scielo.br/scielo.php?script=sci_arttext&pid=S0004-27492013000300008&nrm=iso},
+}
+
 @Article{jia2014caffe,
   author  = {Jia, Yangqing and Shelhamer, Evan and Donahue, Jeff and Karayev, Sergey and Long, Jonathan and Girshick, Ross and Guadarrama, Sergio and Darrell, Trevor},
   title   = {Caffe: Convolutional Architecture for Fast Feature Embedding},
@@ -63,13 +77,6 @@
   file      = {:Malik2012 - Structure-function relationship in glaucoma_ past thinking and current concepts.pdf:PDF},
   publisher = {Wiley-Blackwell},
   url       = {http://dx.doi.org/10.1111/j.1442-9071.2012.02770.x},
-}
-
-@PhdThesis{Populacoes2009,
-  author = {Marcelo Dias},
-  title  = {Geracao de Populacoes Artificiais para Treinamento de Classificadores de Apoio ao diagnostico de Glaucoma},
-  school = {Escola Politecnica da USP},
-  year   = {2009},
 }
 
 @Article{huang1991,
@@ -246,11 +253,11 @@
   url           = {http://arxiv.org/abs/1409.1556},
 }
 
-@Electronic{convTDS,
+@Misc{convTDS,
   author  = {Arden Dertat},
+  title   = {Applied Deep Learning - Part 4: Convolutional Neural Networks},
   month   = nov,
   year    = {2017},
-  title   = {Applied Deep Learning - Part 4: Convolutional Neural Networks},
   url     = {https://towardsdatascience.com/applied-deep-learning-part-4-convolutional-neural-networks-584bc134c1e2},
   urldate = {13.10.2018},
 }
@@ -324,7 +331,7 @@
   pages         = {68--77},
   month         = mar,
   issn          = {1874-3641},
-  __markedentry = {[samira:6]},
+  __markedentry = {[samira:]},
   abstract      = {Identification of structural damage to the optic nerve and retinal nerve fiber layer (RNFL) is an essential component of diagnosis and management of glaucoma. The introduction of spectral-domain OCT (SD-OCT) has allowed objective quantification of damage to these structures with unprecedented resolution. In addition, recent attention has been directed towards imaging the macular area for quantifying loss of neural tissue caused by the disease. Many studies have evaluated and compared the diagnostic accuracies of a variety of parameters that can be obtained from imaging these areas of the ocular fundus. In this article, we critically review the existing literature evaluating the diagnostic accuracy of SD-OCT in glaucoma and we discuss issues related to how SD-OCT results should be incorporated into clinical practice.},
   comment       = {TOOPHTJ-9-68[PII]
 26069519[pmid]},
@@ -355,7 +362,7 @@ of Gaussian (MOG), and mixture of generalized Gaussian (MGG).
 MLP and SVM are classifiers that work directly on the decision
 boundary and fall under the discriminative paradigm. Generative
 classifiers, which first model the data probability density and
-then perform classification via Bayes’ rule, usually give deeper
+then perform classification via Bayesï¿½ rule, usually give deeper
 insight into the structure of the data space. We have applied
 MOG, MGG, LDA, QDA, and Parzen window to the classification
 of glaucoma from SAP. Performance of the various classifiers was
@@ -367,10 +374,18 @@ from STATPAC. Forward-selection and backward-elimination
 methodology further improved the classification rate and also has
 the potential to reduce testing time by diminishing the number of
 visual-field location measurements.},
-  comment       = {O artigo faz a comparação de vários classificadores utilizando dados do exame de Campimetria para classificar paciente glaucomatosos e saudáveis.O estudo utiliza os dados estatísticos gerados pelo equipamento Humpfrey. Os classificadores utilizados são: redes neurais, support vector machine, linear and quadratic discriminant analysis, parzen window, mixture of Gaussian e mixture of generalized Gaussian. Os desempenhos foram analisados através de curvas ROC.
-Os resultados mostrados são divididos em duas categorias de classificadores: discriminativos e generativos. Entre os discriminativos, gaussian SVM obteve o melhor resultado. Entre os generativos, quadratic discriminant analysis teve o melhor resultado, um pouco acima do resultado do SVM.
-Em geral, o resultado dos classificadores foi superior ao pacote de análise estatística oferecido pelo equipamento Humpfrey, e oferece perspectiva para bons resultados no uso para classificação e análise de progressão do glaucoma.},
+  comment       = {O artigo faz a comparaï¿½ï¿½o de vï¿½rios classificadores utilizando dados do exame de Campimetria para classificar paciente glaucomatosos e saudï¿½veis.O estudo utiliza os dados estatï¿½sticos gerados pelo equipamento Humpfrey. Os classificadores utilizados sï¿½o: redes neurais, support vector machine, linear and quadratic discriminant analysis, parzen window, mixture of Gaussian e mixture of generalized Gaussian. Os desempenhos foram analisados atravï¿½s de curvas ROC.
+Os resultados mostrados sï¿½o divididos em duas categorias de classificadores: discriminativos e generativos. Entre os discriminativos, gaussian SVM obteve o melhor resultado. Entre os generativos, quadratic discriminant analysis teve o melhor resultado, um pouco acima do resultado do SVM.
+Em geral, o resultado dos classificadores foi superior ao pacote de anï¿½lise estatï¿½stica oferecido pelo equipamento Humpfrey, e oferece perspectiva para bons resultados no uso para classificaï¿½ï¿½o e anï¿½lise de progressï¿½o do glaucoma.},
   file          = {:comparative of ml classifiers for glaucoma.pdf:PDF},
+}
+
+@Misc{zeiss,
+  author    = {{{Carl Zeiss Meditec}}},
+  title     = {Cirrus HD-OCT 5000 and 500: Technical Specifications},
+  year      = {2016},
+  timestamp = {2018-10-14},
+  url       = {https://www.zeiss.com/meditec/int/products/ophthalmology-optometry/glaucoma/diagnostics/oct/oct-optical-coherence-tomography/cirrus-hd-oct.html},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
