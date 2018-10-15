@@ -59,10 +59,10 @@ GOMI, Edson S.\IEEEauthorrefmark{1}}
 
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
-Glaucoma is a cronic disease with slow progression and is characterized by the loss of the nerve fiber layer in the eye, if not treated it can lead to irreversible blindness.
-The goal of this paper is to investigate if it is possible to diagnose glaucoma from nerve fiber layer thickness images using a convolutional neural network.
-Using VGG16 and transfer learning technique, the net was initialized using weights pretrained with ImageNet for training and classification of glaucoma on a dataset of images of nerve fiber layer thickness.
-Initial results show that the use of OCT images in glaucoma diagnosis is viable, however, high loss on validation dataset suggests overfitting. One hypothesis for this result is the limited number of images in the training dataset.t.
+Glaucoma is a cronic disease of slow progression and is characterized by the loss of the nerve fiber layer in the eye, if not treated it can lead to irreversible blindness.
+The goal of this paper is to investigate the possibility of diagnosing glaucoma from nerve fiber layer thickness images using a convolutional neural network.
+Using VGG16 and transfer learning technique, the net was initialized using pretrained weights for training and glaucoma classification on a dataset of images of nerve fiber layer thickness.
+Initial results show that the use of OCT images in glaucoma diagnosis is viable, however, high loss on validation dataset suggests overfitting. One hypothesis for this result is the limited number of images in the training dataset.
 \end{abstract}
 
 \renewcommand\IEEEkeywordsname{Keywords}
@@ -76,7 +76,7 @@ Glaucoma Diagnosis, Optical Coherence Tomography, Convolutional Neural Network, 
 \label{Resumo}
 Glaucoma é uma doença crônica e de lenta progressão que caracteriza-se pela perda da camada de fibras nervosas no olho, se não tratada pode levar à cegueira irreversível. 
 O objetivo deste trabalho é investigar se é possível fazer o diagnóstico do glaucoma a partir das imagens da espessura da camada de fibras nervosas por meio de uma rede neural convolucional.
-Utilizando a rede VGG16 com técnica de transfer learning, foi feita a inicialização dos pesos pré-treinados no ImageNet para treinamento e classificação de glaucoma em um dataset de imagens de espessura da camada de fibras nervosas.
+Utilizando a rede VGG16 com técnica de transfer learning, foi feita a inicialização dos pesos pré-treinados para treinamento e classificação de glaucoma em um dataset de imagens de espessura da camada de fibras nervosas.
 Os resultados iniciais mostram que a utilização de imagens de OCT no diagnóstico de glaucoma é viável, porém, o alto erro no dataset de validação indica overfitting. Uma das hipóteses para o resultado é a pequena quantidade de imagens de treinamento.
 
 \end{abstract}
@@ -118,7 +118,7 @@ O objetivo deste trabalho é investigar se é possível fazer o diagnóstico do 
 
 \begin{figure}[!tp]
   \centering
-  \includegraphics[width=2.5in]{img/oct_regiao.png}
+  \includegraphics[width=2.3in]{img/oct_regiao.png}
   \caption{Saída de um exame de OCT.}
   \label{fig:oct}
 \end{figure}
@@ -154,11 +154,11 @@ Atualmente, o diagnóstico do glaucoma é feito com uma combinação de exame es
 O exame OCT utiliza o princípio da interferometria luminosa para medir as espessuras das estruturas intraoculares. Ao realizar uma varredura, o equipamento emite feixes de laser infravermelho e mede o tempo que a luz leva para ser refletida. Em cada estrutura atravessada, uma parte dessa luz é refletida de volta. O cálculo da espessura é baseado na diferença entre o feixe de luz de referência e a luz refletida \cite{huang1991}. 
 
 % arrumar explicação *************** OK
-Na figura \ref{fig:oct} vemos a saída gerada pelo equipamento Cirrus HD-OCT da Carl Zeiss Meditec Inc \cite{zeiss}. Na região A, indicada em vermelho, está as imagens de espessuras da camada de fibras nervosas. Essas espessuras são representadas como em um mapa de calor, onde espessuras próximas à $0$ são apresentadas em azul, do verde até o amarelo e laranja são espessuras até $175$ mícrons e de vermelho até aproximar-se do branco representam espessuras de $175$ à $350$ mícrons. O disco central em cinza é a fóvea, ponto cego do olho de onde sai o nervo óptico. Na região B, em laranja, são exibidas as imagens tomográficas da camada de fibras nervosas em um corte circular em volta da fóvea. A região C, em preto, exibe gráficos de espessura na região circular ao redor da fóvea, também chamada de mapa TSNIT (Temporal, Superior, Nasal, Inferior, Temporal). Além do gráfico, são exibidos também as médias de espessura por quadrantes e horas de relógio. As medidas de espessuras são sempre comparadas com o banco de dados normativo do aparelho para indicar se a medida está dentro de 95\% da população normal (em verde), dentro de apenas 5\% da população (em amarelo), ou em apenas 1\% da população (em vermelho) \cite{aref2010}. 
+Na figura \ref{fig:oct} vemos a saída gerada pelo equipamento Cirrus HD-OCT da Carl Zeiss Meditec Inc \cite{zeiss}. Na região A estão as imagens de espessuras da camada de fibras nervosas. Essas espessuras são representadas como um mapa de calor, onde espessuras próximas à $0$ são apresentadas em azul, do verde até o amarelo e laranja são espessuras até $175$ mícrons e de vermelho até aproximar-se do branco espessuras de $175$ à $350$ mícrons. O disco central em cinza é a fóvea, ponto cego de onde sai o nervo óptico. Na região B, são exibidas as imagens tomográficas da camada de fibras nervosas em um corte circular em volta da fóvea. A região C exibe gráficos de espessura na região circular ao redor da fóvea, também chamada de mapa TSNIT (Temporal, Superior, Nasal, Inferior, Temporal). Além do gráfico, são exibidos também as médias de espessura por quadrantes e horas de relógio. As medidas de espessuras são comparadas com o banco de dados normativo do aparelho para indicar se a medida está dentro de 95\% da população normal (em verde), dentro de apenas 5\% da população (em amarelo), ou em apenas 1\% da população (em vermelho) \cite{aref2010}. 
 
 %medico precisa ter especializacao para avaliar e dar o diagnostico *********** OK
 %auxiliar na tomada de decisão **************** OK
-O estudo de Gracitelli \textit{et al.} mostra que os parâmetros de média de espessura por quadrantes ou a média global da espessura da camada de fibras nervosas é amplamente utilizado na análise para diagnóstico do glaucoma \cite{Gracitelli2015}. No entanto, nenhum exame fornece resultados definitivos da situação do paciente, necessitando assim da avaliação de um profissional oftalmologista especialista em glaucoma para conclusão do resultado. Esta análise não é padronizada e pode variar de acordo com o julgamento do oftalmologista \cite{kroese2003}. É possível utilizar classificadores de aprendizagem de máquina para auxiliar na tomada de decisão do oftalmologista. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Diferentemente deste estudo, Asaoka \textit{et al.} utilizaram dados do exame funcional SAP, com uma arquitetura de rede com apenas 4 camadas. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{bowd2008, silva2013}. Em geral, equipamentos oftalmológicos possuem seus próprios algoritmos para análise e classificação, mas o estudo de Kwokleung Chan \textit{et al.} mostra que algoritmos de classificação são mais eficientes \cite{kwokleung2002}.
+O estudo de Gracitelli \textit{et al.} mostra que os parâmetros de média de espessura por quadrantes ou a média global da espessura da camada de fibras nervosas é amplamente utilizado na análise para diagnóstico do glaucoma \cite{Gracitelli2015}. No entanto, nenhum exame fornece resultados definitivos da situação do paciente, sendo necessária a avaliação de um profissional oftalmologista especialista em glaucoma para conclusão do resultado. Esta análise não é padronizada e pode variar de acordo com o julgamento do oftalmologista \cite{kroese2003}. É possível utilizar classificadores de aprendizagem de máquina para auxiliar na tomada de decisão do oftalmologista. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Diferentemente deste estudo, Asaoka \textit{et al.} utilizaram dados do SAP, com uma arquitetura de rede com apenas 4 camadas. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{bowd2008, silva2013}. Em geral, equipamentos oftalmológicos possuem seus próprios algoritmos para análise e classificação, mas o estudo de Kwokleung Chan \textit{et al.} mostra que algoritmos de classificação são mais eficientes \cite{kwokleung2002}.
 
 % classificadores com parametros de oct (horas de relogio) e sap
 %pegar imagem do oct para utilizar toda a area de espessura do nervo para usar no diagnostico
@@ -169,13 +169,13 @@ O estudo de Gracitelli \textit{et al.} mostra que os parâmetros de média de es
 %explicar cada tipo de camada
 %imagens das saidas em cada convolucional
 
-Redes neurais profundas estão sendo amplamente utilizadas em diversos domínios para classificação e detecção de objetos, principalmente em visão computacional e reconhecimento e processamento de linguagem natural. Essas redes consistem em várias camadas conectadas que aprendem a reconhecer padrões nos dados apresentados, sejam eles imagens ou sons \cite{LeCun2015}. O principal tipo de rede utilizado é a rede neural convolucional CNN (Convolutional Neural Network). As CNNs mostraram ser excelentes ferramentas no processamento de imagens, inclusive na área médica, sendo utilizadas para classificação, detecção de objetos e segmentação. Esse sucesso deve-se principalmente à utilização de grandes quantidades de exemplos de treinamento, que permitem que a rede aprenda a reconhecer características a partir dos dados brutos das imagens \cite{greenspan2016}. %raw data?
+Redes neurais profundas estão sendo amplamente utilizadas para classificação e detecção de objetos, principalmente em visão computacional e reconhecimento e processamento de linguagem natural. Essas redes consistem em várias camadas conectadas que aprendem a reconhecer padrões nos dados, sejam eles imagens ou sons \cite{LeCun2015}. O principal tipo de rede utilizado é a rede neural convolucional CNN (Convolutional Neural Network). As CNNs mostraram ser excelentes ferramentas no processamento de imagens, inclusive na área médica, sendo utilizadas para classificação, detecção de objetos e segmentação. Esse sucesso deve-se principalmente à utilização de grandes quantidades de exemplos de treinamento, que permitem que a rede aprenda a reconhecer características a partir dos dados brutos \cite{greenspan2016}. %raw data?
 
-As CNNs são compostas de várias camadas conectadas, sendo os principais tipos as convolucionais, pooling e as camadas totalmente conectadas. As camadas convolucionais servem como filtros para identificar as características das imagens, como curvas, bordas e cores. As saídas das camadas convolucionais são mapas de características identificadas na imagem de entrada. A convolução é feita utilizando uma máscara (ou kernel) que desliza por todos os pixels da imagem multiplicando os valores do pixel pelos valores da máscara. Essa multiplicação é feita em toda a imagem com diferentes máscaras, gerando assim as saídas dos diferentes filtros em cada camada de convolução.
+As CNNs são compostas de várias camadas conectadas, sendo os principais tipos as convolucionais, pooling e as camadas totalmente conectadas. As camadas convolucionais servem como filtros para identificar as características das imagens, como curvas, bordas e cores. As saídas das camadas convolucionais são mapas de características identificadas. A convolução é feita utilizando uma máscara (ou kernel) que desliza por todos os pixels da imagem multiplicando os valores do pixel pelos valores da máscara. Essa multiplicação é feita em toda a imagem com diferentes máscaras, gerando as saídas dos diferentes filtros em cada camada de convolução.
 
 Após a identificação dessas características, a camada de pooling agrupa as características e reduz a resolução da imagem. Também utilizando uma máscara, a operação de pooling irá calcular o valor máximo em cada região da imagem, agrupando características similares em um mesmo pixel. Na figura \ref{fig:imagens_rede} é possível acompanhar o agrupamento de características e a redução da resolução da imagem ao longo de 5 camadas convolucionais e pooling.
 
-As camadas totalmente conectadas recebem todas as características identificadas nas imagens e fazem a classificação final. A saída dessa camada será um vetor com o número de classes a serem classificadas, cada classe terá um valor de probabilidade sendo o maior valor a classe identificada para a imagem. O desenho de uma configuração de rede convolucional profunda pode ser visto na figura \ref{fig:convolucao}. Várias camadas de convolução e pooling utilizando ativações por ReLU (Rectified Linear Unit) são seguidas por duas ou mais camadas totalmente conectadas. O aumento da quantidade de camadas mostrou-se eficiente no aumento da acurácia de classificação das redes convolucionais \cite{simonyan2014}.
+As camadas totalmente conectadas recebem todas as características identificadas nas imagens e fazem a classificação final. A saída dessa camada será um vetor com o número de classes a serem classificadas, cada classe terá um valor de probabilidade sendo o maior valor a classe identificada para a imagem. O desenho de uma configuração de uma CNN pode ser vista na figura \ref{fig:convolucao}. Várias camadas de convolução e pooling utilizando ativações por ReLU (Rectified Linear Unit) são seguidas por duas ou mais camadas totalmente conectadas. O aumento da quantidade de camadas mostrou-se eficiente no aumento da acurácia de classificação das CNNs \cite{simonyan2014}.
 
 %referencia imagem ****** OK
 
@@ -196,9 +196,9 @@ As camadas totalmente conectadas recebem todas as características identificadas
   %dar exemplo do treinamento do VGG ****** OK
   Para treinar uma CNN é necessário ter um conjunto muito grande de exemplos para treinamento e teste. As redes VGG, por exemplo, foram treinadas utilizando o dataset ILSVRC-2012 \cite{ILSVRC15} que contém 1000 classes e foi dividido em 3 conjuntos: 1.3 milhões de imagens para treino, 50 mil imagens para validação e 100 mil imagens para teste \cite{simonyan2014}. No entanto, imagens médicas são muito mais difíceis de se obter, principalmente com anotações de classes, devido ao tempo para realizar os estudos e para anotar todos os exemplos \cite{greenspan2016}.
   
-  Uma alternativa para a utilização de redes profundas com um dataset menor é a utilização do transfer learning. Essa técnica consiste em usar uma rede treinada com um dataset grande de imagens em um domínio mais amplo e transferir esse conhecimento para um domínio mais específico. Dessa forma, ao invés de utilizar inicialização randômica dos parâmetros da rede, utiliza-se os pesos de uma rede já treinada. A utilização de uma rede pré-treinada reduz o tempo de treinamento e a necessidade de um dataset muito grande para o novo objetivo \cite{tan2018}.
+  Uma alternativa para a utilização de CNNs com um dataset menor é a utilização do \textit{transfer learning}. Esta técnica consiste em usar uma rede treinada com um dataset grande de imagens em um domínio mais amplo e transferir esse conhecimento para um domínio mais específico. Dessa forma, ao invés de utilizar inicialização randômica dos parâmetros, utiliza-se os pesos de uma rede já treinada. A utilização de uma rede pré-treinada reduz o tempo de treinamento e a necessidade de um dataset muito grande para o novo objetivo \cite{tan2018}.
 
-  A aplicação do transfer learning pode ser feita em diversos contextos onde haja dificuldade de obter dados para treinamento. Em um survey, Shao \textit{et al.} \cite{shao2015} relatam diversos usos de transfer learning para treinamento de redes com diferentes domínios alvo. Em oftalmologia, essa técnica mostrou-se eficiente para classificação de retinopatia diabética \cite{li2017} e degeneração macular \cite{lee2017}. Nestes trabalhos foram utilizadas redes pré-treinadas com o dataset ImageNet, o que mostra que é possível utilizar o conhecimento de um domínio de origem mais amplo em uma tarefa específica. 
+  A aplicação do \textit{transfer learning} pode ser feita em diversos contextos onde haja dificuldade de obter dados para treinamento. Em um survey, Shao \textit{et al.} \cite{shao2015} relatam diversos usos de \textit{transfer learning} para treinamento de redes com diferentes domínios alvo. Em oftalmologia, essa técnica mostrou-se eficiente para classificação de retinopatia diabética \cite{li2017} e degeneração macular \cite{lee2017}. Nestes trabalhos foram utilizadas redes pré-treinadas com o dataset ImageNet, o que mostra que é possível utilizar o conhecimento de um domínio de origem mais amplo em uma tarefa específica. 
 
   \subsection{Redes pré-treinadas}
 
@@ -206,7 +206,7 @@ As camadas totalmente conectadas recebem todas as características identificadas
 
   Entre as diversas redes convolucionais já treinadas com o ImageNet, foi escolhida a rede VGG16 para utilização neste experimento. Essa rede foi utilizada para classificação de degeneração macular com imagens de OCT no estudo de Lee \textit{et al.} \cite{lee2017}. Os resultados apresentados são promissores, obtendo área sob a curva ROC de $97,46\%$.
 
-  A rede VGG16 foi utilizada no ImageNet Large Scale Visual Recognition Challenge (ILSVRC) em 2014, uma competição de reconhecimento de imagens utilizando redes neurais profundas. A rede é composta ao todo de $21$ camadas com ativações ReLU, sendo $13$ camadas convolucionais, $5$ max pooling e $3$ camadas totalmente conectadas no final, duas com 4096 saídas e a última com 1000 saídas de classificação. Diferente de outras arquiteturas, o VGG16 utiliza kernels menores nas camadas de convolução, o que diminui o número de pesos necessários mas ainda com um poder discriminativo alto. \cite{simonyan2014}.
+  A rede VGG16 foi utilizada no ImageNet Large Scale Visual Recognition Challenge (ILSVRC) em 2014, uma competição de reconhecimento de imagens utilizando CNNs. A rede é composta de $21$ camadas com ativações ReLU, sendo $13$ camadas convolucionais, $5$ max pooling e $3$ camadas totalmente conectadas, duas com 4096 saídas e a última com 1000 saídas de classificação. Diferente de outras arquiteturas, o VGG16 utiliza kernels menores nas camadas de convolução, o que diminui o número de pesos necessários mas ainda com um poder discriminativo alto. \cite{simonyan2014}.
 
 \section{Experimentos e resultados}
 
@@ -215,11 +215,9 @@ As camadas totalmente conectadas recebem todas as características identificadas
   %aumento do dataset, rotações aleatorias entre 0 e 360
   %divisao treino e validação
 
-  O dataset original foi obtido com o departamento de oftalmologia da Unicamp. O dataset consiste de imagens de OCT com tamanho 136x136 de $56$ olhos com glaucoma e $66$ olhos normais, totalizando $122$ pacientes. As imagens de espessura da camada de fibras nervosas foram obtidas através da extração das imagens do PDF do exame. Foram selecionados para o experimento somente os olhos de pacientes que foram manualmente classificados por especialistas.
+  O dataset original foi obtido com o departamento de oftalmologia da Unicamp. O dataset consiste de imagens de OCT com tamanho 136x136 de $56$ olhos com glaucoma e $66$ olhos normais, totalizando $122$ pacientes. Foram selecionados para o experimento somente os olhos de pacientes que foram manualmente classificados por especialistas. Para a separação do dataset em treino e validação, foram selecionados $20\%$ de olhos normais e $20\%$ de olhos com glaucoma para validação, e o restante para treino, totalizando $98$ imagens de treino e $24$ para validação.
 
-  Para a separação do dataset em treino e validação, foram selecionados $20\%$ de olhos normais e $20\%$ de olhos com glaucoma para validação, e o restante para treino, totalizando $98$ imagens de treino e $24$ para validação. As imagens selecionadas para teste não estão presentes no dataset de treino, para que o algoritmo possa classificar imagens independentes.
-
-  Para evitar overfitting, foi empregada uma técnica para aumentar o número de exemplos a partir das imagens no dataset de treino. Cada imagem foi rotacionada $100$ vezes em ângulos aleatórios entre $0$ e $360$ graus, gerando assim um dataset de treino com $9800$ imagens. As imagens de validação não foram rotacionadas.
+  Para evitar overfitting, foi empregada técnica para aumentar o número de exemplos a partir das imagens no dataset de treino. Cada imagem foi rotacionada $100$ vezes em ângulos aleatórios entre $0$ e $360$ graus, gerando um dataset de treino com $9800$ imagens. As imagens de validação não foram rotacionadas.
 
   \subsection{Pré-processamento}
 
@@ -230,7 +228,7 @@ As camadas totalmente conectadas recebem todas as características identificadas
   
   %gerar saida da imagem media, calcular desvio padrao, gerar imagens com media+desvio padrao e media-desvio padrao
   
-  Para utilização do transfer learning, foi necessário fazer a subtração do pixel médio. O pixel médio é calculado sobre todas as imagens do dataset de treino utilizando a equação \ref{eq:mean_pixel}, onde $P_c$ é o valor médio por canal, $M$ e $N$ são as dimensões das imagens de entrada (largura e altura, respectivamente), $I$ é a quantidade total de imagens no dataset de treino e $p_{mni}$ é o valor do pixel na posição $\{m,n\}$ na imagem $i$. O valor do pixel médio é calculado em cada canal RGB da imagem, gerando assim um vetor de 3 posições com um valor médio por canal.
+  Para utilização do \textit{transfer learning}, foi necessário fazer a subtração do pixel médio. O pixel médio é calculado sobre todas as imagens do dataset de treino utilizando a equação \ref{eq:mean_pixel}, onde $P_c$ é o valor médio por canal, $M$ e $N$ são as dimensões das imagens de entrada (largura e altura, respectivamente), $I$ é a quantidade total de imagens no dataset de treino e $p_{mni}$ é o valor do pixel na posição $\{m,n\}$ na imagem $i$. O valor do pixel médio é calculado em cada canal RGB, gerando um vetor de 3 posições com um valor médio por canal.
 
   %verificar equacao *********************
 
@@ -257,15 +255,15 @@ As camadas totalmente conectadas recebem todas as características identificadas
 
   \begin{figure}[!tp]
     \centering
-    \includegraphics[width=2.5in]{img/curve_vgg16.png}
-    \caption{Acurácia e erro de treino e validação da rede VGG16 com transfer learning.}
+    \includegraphics[width=2in]{img/curve_vgg16.png}
+    \caption{Acurácia e erro de treino e validação no experimento.}
     \label{fig:acuracia_vgg16_transfer}
   \end{figure}
 
 
-  Neste experimento, foi utilizada a mesma arquitetura da rede VGG16, alterando a saída da última camada totalmente conectada para duas saídas, correspondente às duas classes a serem classificadas: normal e glaucoma. Os pesos pré-treinados foram carregados para inicialização apenas das camadas convolucionais. As três últimas camadas totalmente conectadas foram inicializadas com valores aleatórios de uma distribuição normal com desvio padrão $0.01$. %As imagens do Imagenet tinham a resolução de 224x224 pixels, enquanto que as imagens de OCT têm resolução de 136x136 pixels, por isso a camada de entrada da rede também foi alterada para a resolução das imagens do dataset utilizado.
+  Neste experimento foi utilizada a mesma arquitetura da rede VGG16, alterando a saída da última camada totalmente conectada para duas saídas, correspondente às duas classes a serem classificadas: normal e glaucoma. Os pesos pré-treinados foram carregados para inicialização apenas das camadas convolucionais. As três últimas camadas totalmente conectadas foram inicializadas com valores aleatórios de uma distribuição normal com desvio padrão $0.01$. %As imagens do Imagenet tinham a resolução de 224x224 pixels, enquanto que as imagens de OCT têm resolução de 136x136 pixels, por isso a camada de entrada da rede também foi alterada para a resolução das imagens do dataset utilizado.
   
-  O treinamento foi realizado em todas as camadas da rede, utilizando o gradiente descendente estocástico por $5000$ iterações, com mini batches de $15$ imagens. Os parâmetros de momentum e weight decay foram definidos como $0.9$ e $0.0005$, respectivamente. A taxa de aprendizagem inicial foi de $0.001$. A cada $1000$ iterações a taxa de aprendizagem foi diminuída utilizando a equação \ref{eq:learning_rate}. Onde $base\_lr$ é a taxa de aprendizagem inicial, $\gamma$ é um parâmetro definido com o valor $0.1$, $iter$ é o número da iteração atual e $step$ é um parâmetro definido como $1000$.
+  O treinamento foi realizado em todas as camadas da rede, utilizando o gradiente descendente estocástico por $5000$ iterações, com mini batches de $15$ imagens. Os parâmetros de momentum e weight decay foram definidos como $0.9$ e $0.0005$, respectivamente. A taxa de aprendizagem inicial foi de $0.001$ e foi diminuída a cada $1000$ iterações utilizando a equação \ref{eq:learning_rate}, onde $base\_lr$ é a taxa de aprendizagem inicial, $\gamma$ é um parâmetro definido com o valor $0.1$, $iter$ é o número da iteração atual e $step$ é um parâmetro definido como $1000$.
 
   \begin{equation}
     base\_lr * \gamma^{\floor*{\frac{iter}{step}}}
@@ -274,7 +272,7 @@ As camadas totalmente conectadas recebem todas as características identificadas
 
   %, com sensibilidade de $100\%$ e especificidade de $92.3\%$
   %dois datasets com imagens independentes
-  A validação do modelo foi feita utilizando um dataset de 24 imagens. A acurácia final obtida foi de $95.8\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de erro e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de erro do treinamento chega próximo à zero.
+  A validação do modelo foi feita utilizando um dataset de 24 imagens. A acurácia final obtida foi de $95.8\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de erro e acurácia durante o processo de treinamento. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de erro do treinamento chega próximo à zero.
 
   Os experimentos foram realizados em um servidor com duas GPUs NVidia Quadro K5200 com 8GB de memória cada. O framework de deep learning utilizado para definição da rede e treinamento em todos os experimentos foi o Caffe \cite{jia2014caffe}.
 
@@ -292,7 +290,7 @@ A principal barreira neste estudo foi a quantidade limitada de dados, o que levo
 
 \section{Conclusão}
 
-Neste trabalho foram realizados experimento com a CNN VGG16 para classificação de pacientes com glaucoma e normais a partir de imagens de espessuras da camada de fibras nervosas, extraídos de exames de OCT. Para diminuir o tempo de treinamento e permitir o uso de um dataset reduzido, foi empregada a técnica de transfer learning para inicializar os pesos da rede a partir de uma rede pré-treinada com ImageNet.
+Neste trabalho foram realizados experimentos com a CNN VGG16 para classificação de pacientes com glaucoma e normais a partir de imagens de espessuras da camada de fibras nervosas. Para diminuir o tempo de treinamento e permitir o uso de um dataset reduzido, foi empregada a técnica de \textit{transfer learning} para inicializar os pesos a partir de uma rede pré-treinada com ImageNet.
 
 Os resultados iniciais mostram que é viável o diagnóstico do Glaucoma a partir das imagens de OCT. Infelizmente os resultados obtidos até o momento mostram um alto erro no dataset de validação. Uma das hipóteses para explicar o resultado é que ocorreu overfitting devido à pequena quantidade de imagens disponíveis no dataset atual. A próxima etapa desta pesquisa será realizar novos experimentos com um conjunto estendido de imagens que está em preparação.
 
