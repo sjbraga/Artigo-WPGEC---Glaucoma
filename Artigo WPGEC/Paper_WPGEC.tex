@@ -278,7 +278,7 @@ As camadas totalmente conectadas recebem todas as características identificadas
   %dois datasets com imagens independentes
   A validação do modelo foi feita utilizando um dataset de 24 imagens. A acurácia final obtida foi de $95.8\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de erro e acurácia durante o processo de treinamento da rede. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de erro do treinamento chega próximo à zero.
 
-  Os experimentos foram realizados em um servidor com duas GPUs NVidia Quadro K5200 com 8GB de memória cada. O framework de deep learning utilizado para definição da rede e treinamento em todos os experimentos foi o Caffe, desenvolvido em C++ pela universidade de Berkeley \cite{jia2014caffe}.
+  Os experimentos foram realizados em um servidor com duas GPUs NVidia Quadro K5200 com 8GB de memória cada. O framework de deep learning utilizado para definição da rede e treinamento em todos os experimentos foi o Caffe \cite{jia2014caffe}.
 
 \section{Discussão}
 
@@ -286,7 +286,7 @@ As camadas totalmente conectadas recebem todas as características identificadas
 %dataset pequeno, precisa de mais dados
 %pendente validação com outro dataset
 
-A rede VGG16 foi escolhida para esse experimento por ter obtido bons resultados na classificação de outras doenças oftalmológicas \cite{li2017, lee2017}, porém, outras arquiteturas também podem ser utilizadas. Em um próximo estudo, é possível fazer a comparação com outras redes.
+A rede VGG16 foi escolhida para esse experimento por ter obtido bons resultados na classificação de outras doenças oftalmológicas \cite{li2017, lee2017}, porém, outras arquiteturas também podem ser utilizadas. Como trabalho futuro será feita a comparação dos resultados obtidos neste trabalho com outras CNNs.
 
 A principal barreira neste estudo foi a quantidade limitada de dados, o que levou à utilização de técnicas para aumentar o dataset artificialmente. Ainda não foi possível determinar se as imagens rotacionadas geraram impacto no aprendizado da rede. 
 
@@ -294,7 +294,9 @@ A principal barreira neste estudo foi a quantidade limitada de dados, o que levo
 
 \section{Conclusão}
 
-Os resultados iniciais mostram que houve overfitting no dataset de treinamento, devido ao erro alto obtido no dataset de validação. Um possível motivo para isso é o tamanho reduzido do dataset utilizado. O próximo passo para o estudo será a obtenção de mais imagens para realização de novo treinamento.
+Neste trabalho foram realizados experimento com a CNN VGG16 para classificação de pacientes com glaucoma e normais a partir de imagens de espessuras da camada de fibras nervosas, extraídos de exames de OCT. Para diminuir o tempo de treinamento e permitir o uso de um dataset reduzido, foi empregada a técnica de transfer learning para inicializar os pesos da rede a partir de uma rede pré-treinada com ImageNet.
+
+Os resultados iniciais mostram que é viável o diagnóstico do Glaucoma a partir das imagens de OCT. Infelizmente os resultados obtidos até o momento mostram um alto erro no dataset de validação. Uma das hipóteses para explicar o resultado é que ocorreu overfitting devido à pequena quantidade de imagens disponíveis no dataset atual. A próxima etapa desta pesquisa será realizar novos experimentos com um conjunto estendido de imagens que está em preparação.
 
 %Use BIB file
 \bibliographystyle{abntex2-num}
