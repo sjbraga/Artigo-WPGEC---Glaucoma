@@ -1,0 +1,53 @@
+----------------------- REVIEW 1 ---------------------
+PAPER: 29
+TITLE: Diagnóstico do Glaucoma Usando Imagens de Espessura da Camada de Fibras Nervosas
+AUTHORS: Samira Jato Braga and Edson Satoshi Gomi
+
+Overall evaluation: 3 (strong accept)
+
+----------- Overall evaluation -----------
+Este trabalho estuda a aplicação de redes neurais convolucionais no diagnóstico de glaucoma a partir de imagens de tomografia de coerência óptica, que mostram a espessura da camada de fibras nervosas no olho. A partir de um conjunto de imagens anotadas por especialistas, a rede VGG16, já treinada com sucesso em imagens genéricas, foi treinada para separar olhos com glaucoma de olhos normais. Resultados mostram boa acurácia, apesar do possível overfitting.
+
+O texto é claro, bem organizado e bem escrito, a menos de poucos erros de português. O tema certamente é relevante e o impacto prático é um ponto forte do trabalho. Tendo em vista a categoria (mestrado, iniciante), o trabalho já realizado e o artigo certamente excedem as expectativas com folga.
+
+Apenas uma sugestão: a comparação com outros métodos de classificação, por mais simples que sejam, pode deixar mais clara a adequação das redes neurais convolucionais para este tipo de tarefa.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 29
+TITLE: Diagnóstico do Glaucoma Usando Imagens de Espessura da Camada de Fibras Nervosas
+AUTHORS: Samira Jato Braga and Edson Satoshi Gomi
+
+Overall evaluation: 2 (accept)
+
+----------- Overall evaluation -----------
+O trabalho apresenta uma abordagem para detecção de glaucoma imagens da espessura da
+camada de fibras nervosas.
+
+Pontos fortes:
+- A proposta tem potencial para oferecer impacto tecnológico e social. No entanto, não está clara a contribuição científica.
+
+Pontos fracos:
+- escrita necessita de melhorias;
+- resumo deveria apresentar o diferencial do trabalho;
+- Introdução não apresenta o estado da arte. Também não destaca o diferencial do trabalho e a consequente contribuição;
+- objetivo deve ser enunciado de forma mais clara. Vai definir, desenvolver um método? A escrita no formato como está "objetivo deste trabalho ´e investigar se ´e poss´ıvel..." não define exatamente o que será feito.
+
+Dúvidas e sugestões de melhorias:
+- rever o texto em relação à escrita. Exs de pontos a melhorar: pontuação ("nervosas no olho, se n˜ao tratada" -- vírgula deveria ser substituída por ponto final); [OK] parágrafos longos, com várias ideias misturadas.
+- melhorar a introdução, conforme indicações acima;
+- alguns pontos precisam de mais detalhes. Exs:(1)  "Em geral, equipamentos oftalmol´ogicos possuem
+seus pr´oprios algoritmos para an´alise e classificac¸ ˜ao, mas o estudo de Kwokleung Chan et al. mostra que algoritmos de classificac¸ ˜ao s˜ao mais eficientes". Quais algoritmos são usados?; [OK] (2) "Neste experimento foi utilizada a mesma arquitetura da rede VGG16". Como é o funcionamento desta rede? Figuras poderiam auxiliar a compreensão. [Explicado no item Redes neurais convolucionais]
+- A técnica de "transfer learning" tem resultados garantidos mesmo quando o treinamento foi realizado com exemplares fora do contexto almejado? Os autores devem explorar mais este ponto para embasar o trabalho adequadamente. [Não entendi]
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 29
+TITLE: Diagnóstico do Glaucoma Usando Imagens de Espessura da Camada de Fibras Nervosas
+AUTHORS: Samira Jato Braga and Edson Satoshi Gomi
+
+Overall evaluation: 2 (accept)
+
+----------- Overall evaluation -----------
+As figuras, apesar de serem sinalizadas no texto, encontram-se muito distantes dos parágrafos em que são citadas, causando um sério desconforto no processo de leitura e entendimento. 
+Para além disto, recomenda-se apresentar as métricas utilizadas para o cálculo do erro bem como da acurácia.
