@@ -82,7 +82,7 @@ Glaucoma Diagnosis, Optical Coherence Tomography, Convolutional Neural Network, 
 \renewcommand{\abstractname}{Resumo}
 \begin{abstract}
 \label{Resumo}
-Glaucoma é uma doença crônica e de lenta progressão que caracteriza-se pela perda da camada de fibras nervosas no olho, se não tratada pode levar à cegueira irreversível. O objetivo deste trabalho é investigar se é possível fazer o diagnóstico do glaucoma a partir das imagens da espessura da camada de fibras nervosas por meio de uma rede neural convolucional. Utilizando a rede VGG16 com técnica de transfer learning, foi feita a inicialização dos pesos pré-treinados para treinamento e classificação de glaucoma em um dataset de imagens de espessura da camada de fibras nervosas. Os resultados iniciais mostram que a utilização de imagens de OCT no diagnóstico de glaucoma é viável, porém, o alto erro no dataset de validação indica overfitting. Uma das hipóteses para o resultado é a pequena quantidade de imagens de treinamento.
+Glaucoma é uma doença crônica e de lenta progressão que caracteriza-se pela perda da camada de fibras nervosas no olho. Se não tratada pode levar à cegueira irreversível. O objetivo deste trabalho é investigar se é possível fazer o diagnóstico do glaucoma a partir das imagens da espessura da camada de fibras nervosas por meio de uma rede neural convolucional. Utilizando a rede VGG16 com técnica de transfer learning, foi feita a inicialização dos pesos pré-treinados para treinamento e classificação de glaucoma em um dataset de imagens de espessura da camada de fibras nervosas. Os resultados iniciais mostram que a utilização de imagens de OCT no diagnóstico de glaucoma é viável, porém, o alto erro no dataset de validação indica overfitting. Uma das hipóteses para o resultado é a pequena quantidade de imagens de treinamento.
 
 \end{abstract}
 
@@ -110,6 +110,8 @@ Diagnóstico de Glaucoma, Tomografia de Coerência Óptica, Redes Neurais Convol
 \section{Introdução}
 
 %avaliação da espessura numa area mais extensa (nao só no circulo) melhora a capacidade de diagnostico?
+
+%melhorar introdução: estado da arte, diferencial do trabalho (definir melhor o que será feito) *****************
 
 Glaucoma é uma neuropatia óptica crônica multifatorial e de lenta progressão que causa perda de campo visual. Pesquisa realizada por Quigley e Broman mostrou que glaucoma é a segunda maior causa de cegueira no mundo e estimaram que atingirá 79,6 milhões de pessoas até 2020 \cite{Quigley2006}. O glaucoma caracteriza-se pela perda da camada de fibras nervosas no olho, o que pode causar cegueira se não for tratada corretamente \cite{Quigley2011}. O dano na camada de fibras nervosas acontece antes de alteração no campo visual do paciente e, por isso, o diagnóstico precoce é um fator importante para evitar a perda da visão \cite{Malik2012}.
 
@@ -163,7 +165,7 @@ Na figura \ref{fig:oct} vemos a saída gerada pelo equipamento Cirrus HD-OCT da 
 
 %medico precisa ter especializacao para avaliar e dar o diagnostico *********** OK
 %auxiliar na tomada de decisão **************** OK
-O estudo de Gracitelli \textit{et al.} mostra que os parâmetros de média de espessura por quadrantes e a média global da espessura da camada de fibras nervosas são amplamente utilizados na análise para diagnóstico do glaucoma \cite{Gracitelli2015}. No entanto, nenhum exame fornece resultados definitivos da situação do paciente, sendo necessária a avaliação de um profissional oftalmologista especialista em glaucoma para conclusão do resultado. Esta análise não é padronizada e pode variar de acordo com o julgamento do oftalmologista \cite{kroese2003}. É possível utilizar classificadores de aprendizagem de máquina para auxiliar na tomada de decisão do oftalmologista. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Diferentemente deste estudo, Asaoka \textit{et al.} utilizaram dados do SAP, com uma arquitetura de rede com apenas 4 camadas. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{bowd2008, silva2013}. Em geral, equipamentos oftalmológicos possuem seus próprios algoritmos para análise e classificação, mas o estudo de Kwokleung Chan \textit{et al.} mostra que algoritmos de classificação são mais eficientes \cite{kwokleung2002}.
+O estudo de Gracitelli \textit{et al.} mostra que os parâmetros de média de espessura por quadrantes e a média global da espessura da camada de fibras nervosas são amplamente utilizados na análise para diagnóstico do glaucoma \cite{Gracitelli2015}. No entanto, nenhum exame fornece resultados definitivos da situação do paciente, sendo necessária a avaliação de um profissional oftalmologista especialista em glaucoma para conclusão do resultado. Esta análise não é padronizada e pode variar de acordo com o julgamento do oftalmologista \cite{kroese2003}. É possível utilizar classificadores de aprendizagem de máquina para auxiliar na tomada de decisão do oftalmologista. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Diferentemente deste estudo, Asaoka \textit{et al.} utilizaram dados do SAP, com uma arquitetura de rede com apenas 4 camadas. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{bowd2008, silva2013}. Em geral, equipamentos oftalmológicos possuem seus próprios algoritmos para análise e classificação mas o estudo de Kwokleung Chan \textit{et al.} mostra que algoritmos de classificação, como \textit{multilayer perceptron}, \textit{support vector machine} e \textit{discriminant analysis}, são mais eficientes \cite{kwokleung2002}.
 
 % classificadores com parametros de oct (horas de relogio) e sap
 %pegar imagem do oct para utilizar toda a area de espessura do nervo para usar no diagnostico
@@ -277,6 +279,8 @@ As camadas totalmente conectadas recebem todas as características identificadas
 
   %, com sensibilidade de $100\%$ e especificidade de $92.3\%$
   %dois datasets com imagens independentes
+
+  %incluir calculo do erro e da acuracia ********************************
   A validação do modelo foi feita utilizando um dataset de 24 imagens. A acurácia final obtida foi de $95.8\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de erro e acurácia durante o processo de treinamento. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de erro do treinamento chega próximo à zero.
 
   Os experimentos foram realizados em um servidor com duas GPUs NVidia Quadro K5200 com 8GB de memória cada. O framework de deep learning utilizado para definição da rede e treinamento em todos os experimentos foi o Caffe \cite{jia2014caffe}.
