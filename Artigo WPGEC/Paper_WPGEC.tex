@@ -59,18 +59,7 @@ GOMI, Edson S.\IEEEauthorrefmark{1}}
 
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
-Glaucoma is a chronic disease with slow progression
-and is characterized by the loss of the nerve fiber layer in the eye.
-If not treated it can lead to irreversible blindness.  The goal of
-this paper is to investigate the possibility of diagnosing glaucoma
-from images of thickness nerve fiber layer using a convolutional
-neural network (CNN).  Using  VGG16 and transfer learning  technique,
-the CNN was initialized using previously trained weights for training and
-glaucoma classification on a dataset of images of nerve fiber
-layer thickness. Initial results show that the use of OCT images
-in glaucoma diagnosis is viable. However, high loss on validation
-dataset suggests overfitting. One hypothesis for this result is the
-limited number of images in the training dataset.
+Glaucoma is a chronic disease with slow progression and is characterized by the loss of the nerve fiber layer in the eye. If not treated it can lead to irreversible blindness. The goal of this paper is to investigate the possibility of diagnosing glaucoma from images of thickness nerve fiber layer using a convolutional neural network (CNN). Using VGG16 and transfer learning  technique, the CNN was initialized using previously trained weights for training and glaucoma classification on a dataset of images of nerve fiber layer thickness. Initial results show that the use of OCT images in glaucoma diagnosis is viable. However, high loss on validation dataset suggests overfitting. One hypothesis for this result is the limited number of images in the training dataset.
 \end{abstract}
 
 \renewcommand\IEEEkeywordsname{Keywords}
@@ -165,7 +154,9 @@ Na figura \ref{fig:oct} vemos a saída gerada pelo equipamento Cirrus HD-OCT da 
 
 %medico precisa ter especializacao para avaliar e dar o diagnostico *********** OK
 %auxiliar na tomada de decisão **************** OK
-O estudo de Gracitelli \textit{et al.} mostra que os parâmetros de média de espessura por quadrantes e a média global da espessura da camada de fibras nervosas são amplamente utilizados na análise para diagnóstico do glaucoma \cite{Gracitelli2015}. No entanto, nenhum exame fornece resultados definitivos da situação do paciente, sendo necessária a avaliação de um profissional oftalmologista especialista em glaucoma para conclusão do resultado. Esta análise não é padronizada e pode variar de acordo com o julgamento do oftalmologista \cite{kroese2003}. É possível utilizar classificadores de aprendizagem de máquina para auxiliar na tomada de decisão do oftalmologista. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Diferentemente deste estudo, Asaoka \textit{et al.} utilizaram dados do SAP, com uma arquitetura de rede com apenas 4 camadas. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{bowd2008, silva2013}. Em geral, equipamentos oftalmológicos possuem seus próprios algoritmos para análise e classificação mas o estudo de Kwokleung Chan \textit{et al.} mostra que algoritmos de classificação, como \textit{multilayer perceptron}, \textit{support vector machine} e \textit{discriminant analysis}, são mais eficientes \cite{kwokleung2002}.
+O estudo de Gracitelli \textit{et al.} mostra que os parâmetros de média de espessura por quadrantes e a média global da espessura da camada de fibras nervosas são amplamente utilizados na análise para diagnóstico do glaucoma \cite{Gracitelli2015}. No entanto, nenhum exame fornece resultados definitivos da situação do paciente, sendo necessária a avaliação de um profissional oftalmologista especialista em glaucoma para conclusão do resultado. Esta análise não é padronizada e pode variar de acordo com o julgamento do oftalmologista \cite{kroese2003}. 
+
+É possível utilizar classificadores de aprendizagem de máquina para auxiliar na tomada de decisão do oftalmologista. Um classificador de rede neural profunda foi utilizado com dados de exame de campo visual para detectar estágios iniciais de glaucoma \cite{Asaoka2016}. Diferentemente deste estudo, Asaoka \textit{et al.} utilizaram dados do SAP, com uma arquitetura de rede com apenas 4 camadas. Dados de OCT e SAP em conjunto também foram utilizados para treinar diversos tipos de classificadores \cite{bowd2008, silva2013}. Em geral, equipamentos oftalmológicos possuem seus próprios algoritmos para análise e classificação mas o estudo de Kwokleung Chan \textit{et al.} mostra que algoritmos de classificação, como \textit{multilayer perceptron}, \textit{support vector machine} e \textit{discriminant analysis}, são mais eficientes \cite{kwokleung2002}.
 
 % classificadores com parametros de oct (horas de relogio) e sap
 %pegar imagem do oct para utilizar toda a area de espessura do nervo para usar no diagnostico
@@ -283,6 +274,22 @@ As camadas totalmente conectadas recebem todas as características identificadas
   %incluir calculo do erro e da acuracia ********************************
   A validação do modelo foi feita utilizando um dataset de 24 imagens. A acurácia final obtida foi de $95.8\%$. O gráfico na figura \ref{fig:acuracia_vgg16_transfer} mostra a evolução dos valores de erro e acurácia durante o processo de treinamento. A validação foi feita a cada $1000$ iterações. É possível identificar a estabilização da acurácia após $1000$ iterações, quando o valor de erro do treinamento chega próximo à zero.
 
+  % \begin{equation}
+  %   \frac{1}{N}\sum^N_{n=1} \delta\{\hat{\jmath}_n = \jmath_n\} \\
+  %   \\
+  %   \text{, onde } \delta\text{\{condição\}}
+  %   \begin{cases}
+  %     1 & \text{se verdadeiro} \\
+  %     0 & \text{caso contrário}
+  %   \end{cases}
+  %   \label{eq:accuracy}
+  % \end{equation}
+
+  % \begin{equation}
+  %   E = \frac{-1}{N}\sum^N_{n=1} log(\hat{p}_{n,\jmath_n})
+  %   \label{eq:loss}
+  % \end{equation}
+
   Os experimentos foram realizados em um servidor com duas GPUs NVidia Quadro K5200 com 8GB de memória cada. O framework de deep learning utilizado para definição da rede e treinamento em todos os experimentos foi o Caffe \cite{jia2014caffe}.
 
 \section{Discussão}
@@ -301,7 +308,7 @@ A principal barreira neste estudo foi a quantidade limitada de dados, o que levo
 
 Neste trabalho foram realizados experimentos com a CNN VGG16 para classificação de pacientes com glaucoma e normais a partir de imagens de espessuras da camada de fibras nervosas. Para diminuir o tempo de treinamento e permitir o uso de um dataset reduzido, foi empregada a técnica de \textit{transfer learning} para inicializar os pesos a partir de uma rede pré-treinada com ImageNet.
 
-Os resultados iniciais mostram que é viável o diagnóstico do Glaucoma a partir das imagens de OCT. Infelizmente os resultados obtidos até o momento mostram um alto erro no dataset de validação. Uma das hipóteses para explicar o resultado é que ocorreu overfitting devido à pequena quantidade de imagens disponíveis no dataset atual. A próxima etapa desta pesquisa será realizar novos experimentos com um conjunto estendido de imagens que está em preparação.
+Os resultados iniciais mostram que é viável o diagnóstico do Glaucoma a partir das imagens de OCT. Infelizmente os resultados obtidos até o momento mostram um alto erro no dataset de validação. Uma das hipóteses para explicar o resultado é a ocorrência de overfitting devido à pequena quantidade de imagens disponíveis no dataset atual. A próxima etapa desta pesquisa será realizar novos experimentos com um conjunto estendido de imagens que está em preparação.
 
 %Use BIB file
 \bibliographystyle{abntex2-num}
