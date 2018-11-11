@@ -4,6 +4,10 @@
 %
 \usepackage[pdftex]{graphicx}
 
+% *** CITATION PACKAGES ***
+%
+\usepackage{cite}
+
 
 % *** MATH PACKAGES ***
 %
@@ -26,7 +30,7 @@
 
 \usepackage[brazilian]{babel}
 \usepackage[utf8]{inputenc}
-%\usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc}
 \usepackage{fancyhdr}
 
 
@@ -56,6 +60,8 @@ GOMI, Edson S.\IEEEauthorrefmark{1}}
 \maketitle
 
 \thispagestyle{fancy}
+
+%- resumo deveria apresentar o diferencial do trabalho; *************************
 
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
@@ -101,10 +107,16 @@ Diagnóstico de Glaucoma, Tomografia de Coerência Óptica, Redes Neurais Convol
 %avaliação da espessura numa area mais extensa (nao só no circulo) melhora a capacidade de diagnostico?
 
 %melhorar introdução: estado da arte, diferencial do trabalho (definir melhor o que será feito) *****************
+% - Introdução não apresenta o estado da arte. Também não destaca o diferencial do trabalho e a consequente contribuição;
+% - objetivo deve ser enunciado de forma mais clara. Vai definir, desenvolver um método? A escrita no formato como está "objetivo deste trabalho ´e investigar se ´e poss´ıvel..." não define exatamente o que será feito.
 
 Glaucoma é uma neuropatia óptica crônica multifatorial e de lenta progressão que causa perda de campo visual. Pesquisa realizada por Quigley e Broman mostrou que glaucoma é a segunda maior causa de cegueira no mundo e estimaram que atingirá 79,6 milhões de pessoas até 2020 \cite{Quigley2006}. O glaucoma caracteriza-se pela perda da camada de fibras nervosas no olho, o que pode causar cegueira se não for tratada corretamente \cite{Quigley2011}. O dano na camada de fibras nervosas acontece antes de alteração no campo visual do paciente e, por isso, o diagnóstico precoce é um fator importante para evitar a perda da visão \cite{Malik2012}.
 
-O objetivo deste trabalho é investigar se é possível fazer o diagnóstico do glaucoma a partir das imagens da espessura da camada de fibras nervosas por meio de uma rede convolucional.
+%imagens de fundo de olho, valores de espessura de camadas nervosas e dados de campo visual, imagens de espessura ainda não foram utilizadas
+%gap: ainda nao utilizaram a imagem de espessura
+Estudos mostraram ser possível utilizar métodos de aprendizagem de máquina para detectar glaucoma e auxiliar na tomada de decisão do oftalmologista. Os dados utilizados foram imagens de fundo de olho, dados de exame de OCT (Optical Coherence Tomography) ou de campo visual \cite{Gracitelli2015, Asaoka2016, bowd2008, silva2013, kwokleung2002, kumar2016}. 
+
+Não foi encontrado na literatura a utilização de imagens de espessura da camada de fibras nervosas para classificação de glaucoma. O objetivo deste trabalho é investigar se é possível fazer o diagnóstico a partir das imagens da espessura da camada de fibras nervosas por meio de uma rede neural convolucional.
 
 \section{Diagnóstico de glaucoma}
 
@@ -144,7 +156,7 @@ O objetivo deste trabalho é investigar se é possível fazer o diagnóstico do 
 
 %referencia para OCT e para SAP ****** OK
 
-Atualmente, o diagnóstico do glaucoma é feito com uma combinação de exame estrutural, por meio de tomografia de coerência óptica OCT (Optical Coherence Tomography) \cite{Wollstein2005}, e exame funcional, por meio da perimetria computadorizada SAP (Standard Automated Perimetry) \cite{chauhan1990}. Os exames estruturais avaliam a camada de fibras nervosas para identificar alterações na sua espessura e os exames funcionais avaliam o campo visual do paciente em busca de áreas de perda da visão. 
+Atualmente, o diagnóstico do glaucoma é feito com uma combinação de exame estrutural, por meio de tomografia de coerência óptica OCT \cite{Wollstein2005}, e exame funcional, por meio da perimetria computadorizada SAP (Standard Automated Perimetry) \cite{chauhan1990}. Os exames estruturais avaliam a camada de fibras nervosas para identificar alterações na sua espessura e os exames funcionais avaliam o campo visual do paciente em busca de áreas de perda da visão. 
 
 %Não é simples identificar a existência do glaucoma antes que haja dano ao campo visual \cite{Populacoes2009}. 
 O exame OCT utiliza o princípio da interferometria luminosa para medir as espessuras das estruturas intraoculares. Ao realizar uma varredura, o equipamento emite feixes de laser infravermelho e mede o tempo que a luz leva para ser refletida. Em cada estrutura atravessada, uma parte dessa luz é refletida de volta. O cálculo da espessura é baseado na diferença entre o feixe de luz de referência e a luz refletida \cite{huang1991}. 
@@ -308,7 +320,7 @@ A principal barreira neste estudo foi a quantidade limitada de dados, o que levo
 
 Neste trabalho foram realizados experimentos com a CNN VGG16 para classificação de pacientes com glaucoma e normais a partir de imagens de espessuras da camada de fibras nervosas. Para diminuir o tempo de treinamento e permitir o uso de um dataset reduzido, foi empregada a técnica de \textit{transfer learning} para inicializar os pesos a partir de uma rede pré-treinada com ImageNet.
 
-Os resultados iniciais mostram que é viável o diagnóstico do Glaucoma a partir das imagens de OCT. Infelizmente os resultados obtidos até o momento mostram um alto erro no dataset de validação. Uma das hipóteses para explicar o resultado é a ocorrência de overfitting devido à pequena quantidade de imagens disponíveis no dataset atual. A próxima etapa desta pesquisa será realizar novos experimentos com um conjunto estendido de imagens que está em preparação.
+Os resultados iniciais mostram que é viável o diagnóstico do glaucoma a partir das imagens de OCT. Infelizmente os resultados obtidos até o momento mostram um alto erro no dataset de validação. Uma das hipóteses para explicar o resultado é a ocorrência de overfitting devido à pequena quantidade de imagens disponíveis no dataset atual. A próxima etapa desta pesquisa será realizar novos experimentos com um conjunto estendido de imagens que está em preparação.
 
 %Use BIB file
 \bibliographystyle{abntex2-num}
