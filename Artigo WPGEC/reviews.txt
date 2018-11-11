@@ -27,6 +27,7 @@ camada de fibras nervosas.
 Pontos fortes:
 - A proposta tem potencial para oferecer impacto tecnológico e social. No entanto, não está clara a contribuição científica.
 
+Gracitelli2015, Asaoka2016, bowd2008, silva2013, kwokleung2002
 Pontos fracos:
 - escrita necessita de melhorias;
 - resumo deveria apresentar o diferencial do trabalho;
@@ -37,7 +38,7 @@ Dúvidas e sugestões de melhorias:
 - rever o texto em relação à escrita. Exs de pontos a melhorar: 
     pontuação ("nervosas no olho, se n˜ao tratada" -- vírgula deveria ser substituída por ponto final); [OK] 
     parágrafos longos, com várias ideias misturadas. [OK]
-- melhorar a introdução, conforme indicações acima;
+- melhorar a introdução, conforme indicações acima; [OK]
 - alguns pontos precisam de mais detalhes. Exs:
     (1)  "Em geral, equipamentos oftalmol´ogicos possuem seus pr´oprios algoritmos para an´alise e classificac¸ ˜ao, mas o estudo de Kwokleung Chan et al. mostra que algoritmos de classificac¸ ˜ao s˜ao mais eficientes". Quais algoritmos são usados?; [OK] 
     (2) "Neste experimento foi utilizada a mesma arquitetura da rede VGG16". Como é o funcionamento desta rede? Figuras poderiam auxiliar a compreensão. [Explicado no item Redes neurais convolucionais]
