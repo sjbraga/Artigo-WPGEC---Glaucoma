@@ -53,5 +53,5 @@ AUTHORS: Samira Jato Braga and Edson Satoshi Gomi
 Overall evaluation: 2 (accept)
 
 ----------- Overall evaluation -----------
-As figuras, apesar de serem sinalizadas no texto, encontram-se muito distantes dos parágrafos em que são citadas, causando um sério desconforto no processo de leitura e entendimento. 
+As figuras, apesar de serem sinalizadas no texto, encontram-se muito distantes dos parágrafos em que são citadas, causando um sério desconforto no processo de leitura e entendimento. [OK]
 Para além disto, recomenda-se apresentar as métricas utilizadas para o cálculo do erro bem como da acurácia.
